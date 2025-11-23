@@ -1,122 +1,170 @@
 "use client";
-import CheckIcon from "@/assets/check.svg";
-import { twMerge } from "tailwind-merge";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-const pricingTiers = [
+import freeContentImg from "@/assets/youtube3dicon.png";
+import methodologyImg from "@/assets/gorro_graduacion.png";
+import resultsImg from "@/assets/trophy-front-color.png";
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+const helpBoxes = [
   {
-    title: "Free",
-    monthlyPrice: 0,
-    buttonText: "Get started for free",
-    popular: false,
-    inverse: false,
-    features: [
-      "Up to 5 project members",
-      "Unlimited tasks and projects",
-      "2GB storage",
-      "Integrations",
-      "Basic support",
-    ],
+    image: freeContentImg,
+    title: "Contenido gratuito",
+    text: "Descubre mi canal de YouTube con contenido <span class='text-[#3B82F6] font-semibold'>gratuito</span> para mejorar tus habilidades y rendimiento académico.",
+    button: {
+      label: "Mi canal de YouTube",
+      url: "https://www.youtube.com/@jangomezee",
+    },
   },
   {
-    title: "Pro",
-    monthlyPrice: 9,
-    buttonText: "Sign up now",
-    popular: true,
-    inverse: true,
-    features: [
-      "Up to 50 project members",
-      "Unlimited tasks and projects",
-      "50GB storage",
-      "Integrations",
-      "Priority support",
-      "Advanced support",
-      "Export support",
-    ],
+    image: methodologyImg,
+    title: "Metodología probada",
+    text: "Aprende con una metodología <span class='text-[#3B82F6] font-semibold'>efectiva</span> que te garantiza <span class='text-[#3B82F6] font-semibold'>resultados concretos y duraderos</span> en tu aprendizaje. Domina técnicas de alto impacto como la <span class='font-semibold'>Feynman Technique</span>, <span class='font-semibold'>Spaced Repetition</span>, <span class='font-semibold'>Cornell Method</span> o <span class='font-semibold'>Mind Mapping</span> para potenciar tu estudio.",
+    button: {
+      label: "Mira las fuentes",
+      pdf: "/Multiple_Bibliographies_study_techniques.pdf", // PDF en la carpeta public
+      download: false, // si quieres descargar, pon true
+    },
   },
   {
-    title: "Business",
-    monthlyPrice: 19,
-    buttonText: "Sign up now",
-    popular: false,
-    inverse: false,
-    features: [
-      "Up to 5 project members",
-      "Unlimited tasks and projects",
-      "200GB storage",
-      "Integrations",
-      "Dedicated account manager",
-      "Custom fields",
-      "Advanced analytics",
-      "Export capabilities",
-      "API access",
-      "Advanced security features",
-    ],
-  },
+    image: resultsImg,
+    title: "Adaptabilidad",
+    text: `Como estudiante de <span class="text-blue-600 font-semibold">Matemáticas Computacionales</span> y apasionado de economía, empresa e historia, ofrezco un apoyo excepcional en estas materias y en las evaluadas en PAU y grados medios.  
+Con una <span class="text-blue-600 font-semibold">media de 9,25 en bachillerato</span> y nivel <span class="text-blue-600 font-semibold">B2 de inglés</span>, te guío de forma práctica y personalizada para que aprendas, disfrutes y domines cada asignatura.`,
+    button: null, // eliminamos el botón aquí
+  }
 ];
 
 export const Pricing = () => {
+  const [userScore, setUserScore] = useState(6);
+  const averageImprovement = 0.422;
+
+  const projectedScore = () => {
+    const b = 0.35;
+    const t = userScore === 0 ? 0.1 : userScore;
+    let newScore = 10 * Math.pow(t / 10, b);
+    if (newScore > 10) newScore = 10;
+    return parseFloat(newScore.toFixed(2));
+  };
+
+  const data = {
+    labels: ["Tiempo 0", "Tiempo 1"],
+    datasets: [
+      {
+        label: "Tu nota actual",
+        data: [userScore, userScore],
+        borderColor: "#F87171",
+        backgroundColor: "#F87171",
+        tension: 0.3,
+      },
+      {
+        label: "Nota proyectada con metodología",
+        data: [userScore, projectedScore()],
+        borderColor: "#3B82F6",
+        backgroundColor: "#3B82F6",
+        tension: 0.3,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: { position: "top" },
+      title: { display: true, text: "Proyección de nota usando técnicas de aprendizaje" },
+    },
+    scales: { y: { beginAtZero: true, max: 10 } },
+  };
+
   return (
     <section className="py-24 bg-white">
-      <div className="container">
-        <div className="section-heading">
-          <h2 className="section-title">Pricing</h2>
-          <p className="section-des mt-5">
-            Free forever. Upgrade for unlimited tasks, better security, and exclusive features.
-          </p>
-        </div>
+      <div className="container mx-auto px-6">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[#001738]">
+          ¿Cómo te puedo ayudar?
+        </h2>
 
-        <div className="flex flex-col gap-6 items-center mt-10 lg:flex-row lg:items-end lg:justify-center">
-          {pricingTiers.map(({ title, monthlyPrice, buttonText, popular, features, inverse }) => (
-            <div
-              key={title}
-              className={twMerge(
-                "p-10 rounded-3xl border border-[#F1F1F1] shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full",
-                inverse === true && "border-black bg-black text-white"
-              )}
-            >
-              <div className="flex justify-between">
-                <h3 className={twMerge("text-lg font-bold text-black/50", inverse && "text-white/60")}>
-                  {title}
-                </h3>
-                {popular && (
-                  <div className="inline-flex text-sm px-4 py-1.5 rounded-xl border border-white/20">
-                    <motion.span
-                      animate={{
-                        backgroundPositionX: "-100%",
-                      }}
-                      transition={{
-                        duration: 1,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatType: "loop",
-                      }}
-                      className="bg-[linear-gradient(to_right,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF)] [background-size:200%] text-transparent bg-clip-text font-medium"
-                    >
-                      Popular
-                    </motion.span>
-                  </div>
-                )}
-              </div>
-              <div className="flex items-baseline gap-1 mt-[30px]">
-                <span className="text-4xl font-bold tracking-tighter leading-none">${monthlyPrice}</span>
-                <span className="tracking-tight font-bold text-black/50">/month</span>
-              </div>
-              <button
-                className={twMerge("btn btn-primary w-full mt-[30px]", inverse && "bg-white text-black")}
+        <div className="flex flex-col gap-12 md:gap-16">
+          {helpBoxes.map(({ image, title, text, button }, index) => {
+            const isReversed = index % 2 === 1;
+            const isScoreBox = title === "Adaptabilidad";
+
+            return (
+              <div
+                key={index}
+                className={`flex flex-col md:flex-row items-center bg-[#f3f5f8] p-8 md:p-10 rounded-3xl shadow-md hover:shadow-lg transition-shadow duration-300 ${
+                  isReversed ? "md:flex-row-reverse" : ""
+                }`}
               >
-                {buttonText}
-              </button>
-              <ul className="flex flex-col gap-5 mt-8">
-                {features.map((feature) => (
-                  <li key={feature} className="text-sm flex items-center gap-4">
-                    <CheckIcon className="h-6 w-6" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                <div
+                  className={`flex-shrink-0 mb-6 md:mb-0 ${
+                    index === 0 ? "w-32 h-32 md:mr-12" : "w-48 h-48 md:mx-8"
+                  }`}
+                >
+                  <Image src={image} alt={title} className="w-full h-full object-contain rounded-xl" />
+                </div>
+
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 text-[#001738]">{title}</h3>
+                  <p
+                    className="text-gray-700 text-base md:text-lg leading-relaxed mb-6"
+                    dangerouslySetInnerHTML={{ __html: text }}
+                  />
+
+                  {isScoreBox && (
+                    <div className="flex flex-col md:flex-row md:items-center md:gap-6">
+                      <div className="flex flex-col mb-4 md:mb-0">
+                        <label className="font-semibold mb-2">Tu nota actual:</label>
+                        <input
+                          type="number"
+                          min={0}
+                          max={10}
+                          step={0.1}
+                          value={userScore}
+                          onChange={(e) => setUserScore(parseFloat(e.target.value))}
+                          className="border rounded px-3 py-1 w-24"
+                        />
+                        <p className="mt-2">
+                          Nota proyectada: <strong>{projectedScore()}</strong> / 10
+                        </p>
+                        <p className="text-sm text-gray-500 italic mt-1">
+                          * Esta función es una aproximación, modeliza el rendimiento como decreciente y aplica un improvement base inferido.
+                        </p>
+                      </div>
+
+                      <div className="flex-1 max-w-md">
+                        <Line data={data} options={options} />
+                      </div>
+                    </div>
+                  )}
+
+                  {button && button.label && (
+                    <a
+                      href={button.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download={button.download}
+                      className="inline-block bg-[#001738] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#002d6d] transition-colors mt-4"
+                    >
+                      {button.label}
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

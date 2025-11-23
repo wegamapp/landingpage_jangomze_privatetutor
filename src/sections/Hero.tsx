@@ -1,11 +1,8 @@
 "use client";
-import ArrowIcon from "@/assets/arrow-right.svg";
-import cogImage from "@/assets/cog.png";
-import cylinderImage from "@/assets/cylinder.png";
-import noodleImage from "@/assets/noodle.png";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import Image from "next/image";
+import fotolateral from "@/assets/mirando_al_lateral.png";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { RotatingTextCircle } from "@/components/RotatingTextCircle";
 
 export const Hero = () => {
   const heroRef = useRef(null);
@@ -14,73 +11,80 @@ export const Hero = () => {
     offset: ["start end", "end start"],
   });
 
-  const translateY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const translateY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   return (
     <section
       ref={heroRef}
-      className="pt-8 pb-20 md:pt-5 md:pb-10 overflow-x-clip"
-      style={{ background: "radial-gradient(ellipse 200% 100% at bottom left, #183EC2, #EAEEFE 100%)" }}
+      className="pt-8 pb-20 md:pt-5 md:pb-10 overflow-x-clip relative"
+      style={{
+        background:
+          "radial-gradient(ellipse 200% 100% at bottom left, #183EC2, #EAEEFE 100%)",
+      }}
     >
       <div className="container">
-        <div className="md:flex items-center">
+        <div className="md:flex items-center justify-between">
+          
+          {/* ----------- TEXTO ----------- */}
           <div className="md:w-[478px]">
-            <div className="text-sm inline-flex border border-[#222]/10 px-3 py-1 rounded-lg tracking-tight">
-              Version 2.0 is here
+            <h2 className="text-lg md:text-xl font-bold text-black mt-2 tracking-wide">
+              SOY JAN GÓMEZ ESCOBAR
+            </h2>
+
+            <div className="lg:w-2/3 md:w-full">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">
+                Aprende a estudiar de forma efectiva y alcanza la carrera de
+                <span className="inline bg-blue-200 text-black px-0.5 py-0.5">
+                  {" "}
+                  tus sueños.
+                </span>
+              </h2>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-6">
-              Pathway to productivity
-            </h1>
-            <p className="text-xl text-[#010D3E] tracking-tight mt-6">
-              Celebrate the joy of accomplishment with an app designed to track your progress, motivate your
-              efforts, and celebrate your success.
-            </p>
+
             <div className="flex gap-1 items-center mt-[30px]">
-              <button className="btn btn-primary">Get for free</button>
+              <button className="btn btn-primary">
+                Descubre cómo puedo ayudarte
+              </button>
               <button className="btn btn-text flex gap-1">
                 <span>Learn more</span>
-                {/* <ArrowIcon classname="h-2 w-2" /> */}
               </button>
             </div>
           </div>
-          <div className="mt-20 md:mt-0 md:h-[648px] md:flex-1 relative">
-            <motion.img
-              src={cogImage.src}
-              alt="Cog"
-              className="md:absolute md:h-full md:w-auto md:max-w-none md:-left-6 lg:left-0"
-              animate={{
-                translateY: [-30, 30],
-              }}
-              transition={{
-                repeat: Infinity,
-                repeatType: "mirror",
-                duration: 3,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.img
-              src={cylinderImage.src}
-              width={220}
-              height={220}
-              alt="Cylinder image"
-              className="hidden md:block -top-8 -left-32 md:absolute"
-              style={{
-                translateY: translateY,
-              }}
-            />
-            <motion.img
-              src={noodleImage.src}
-              width={220}
-              alt="Noodle image"
-              className="hidden lg:block top-[524px] left-[448px] absolute rotate-[30deg]"
-              style={{
-                rotate: 30,
-                translateY: translateY,
-              }}
-            />
+
+          {/* ----------- FOTO SOBRE RECTÁNGULO + CIRCULO DE TEXTO ----------- */}
+          <div className="mt-20 md:mt-0 md:flex-1 flex justify-center md:justify-end relative">
+            
+            {/* Imagen sobre rectángulo */}
+            <motion.div
+              style={{ translateY }}
+              className="
+                relative 
+                px-6 py-4
+                rounded-2xl 
+                backdrop-blur-md
+                bg-white/20 
+                shadow-lg 
+                border border-white/30
+                max-w-[450px] 
+                flex 
+                justify-center
+              "
+            >
+              <motion.img
+                src={fotolateral.src}
+                width={630}
+                height={630}
+                alt="Foto lateral"
+                className="rounded-xl -mb-20 md:-mb-40"
+                initial={{ y: -143 }}
+                animate={{ y: -143 }}
+              />
+            </motion.div>
           </div>
+
         </div>
       </div>
     </section>
   );
 };
+

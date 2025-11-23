@@ -1,10 +1,13 @@
 "use client";
-import acmeLogo from "@/assets/logo-acme.png";
-import quantamLogo from "@/assets/logo-quantum.png";
-import echoLogo from "@/assets/logo-echo.png";
-import celestialLogo from "@/assets/logo-celestial.png";
-import pulseLogo from "@/assets/logo-pulse.png";
-import apexLogo from "@/assets/logo-apex.png";
+
+import ankiLogo from "@/assets/logo-anki.png";
+import notionLogo from "@/assets/logo-notion.png";
+import pythonLogo from "@/assets/logo-python.png";
+import sqlLogo from "@/assets/logo-sql.png";
+import tensorFlowLogo from "@/assets/logo-tensor_flow.png";
+import cLogo from "@/assets/logo-C.png";
+import cppLogo from "@/assets/logo-C++.png"; 
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -22,25 +25,29 @@ export const LogoTicker = () => {
               translateX: "-50%",
             }}
             transition={{
-              duration: 20,
+              duration: 25, // un poco más lento por más logos
               repeat: Infinity,
               ease: "linear",
               repeatType: "loop",
             }}
           >
-            <Image src={acmeLogo} alt="Acme logo" className="logo-ticker-image" />
-            <Image src={quantamLogo} alt="quantam logo" className="logo-ticker-image" />
-            <Image src={echoLogo} alt="Echo logo" className="logo-ticker-image" />
-            <Image src={celestialLogo} alt="celestial logo" className="logo-ticker-image" />
-            <Image src={pulseLogo} alt="Pulse logo" className="logo-ticker-image" />
-            <Image src={apexLogo} alt="Apex logo" className="logo-ticker-image" />
+            {/* Logos — primer bloque */}
+            <Image src={ankiLogo} alt="Anki logo" className="logo-ticker-image" />
+            <Image src={notionLogo} alt="Notion logo" className="logo-ticker-image" />
+            <Image src={pythonLogo} alt="Python logo" className="logo-ticker-image" />
+            <Image src={sqlLogo} alt="SQL logo" className="logo-ticker-image" />
+            <Image src={tensorFlowLogo} alt="TensorFlow logo" className="logo-ticker-image" />
+            <Image src={cLogo} alt="C logo" className="logo-ticker-image" />
+            <Image src={cppLogo} alt="C++ logo" className="logo-ticker-image" />
 
-            <Image src={acmeLogo} alt="Acme logo" className="logo-ticker-image" />
-            <Image src={quantamLogo} alt="quantam logo" className="logo-ticker-image" />
-            <Image src={echoLogo} alt="Echo logo" className="logo-ticker-image" />
-            <Image src={celestialLogo} alt="celestial logo" className="logo-ticker-image" />
-            <Image src={pulseLogo} alt="Pulse logo" className="logo-ticker-image" />
-            <Image src={apexLogo} alt="Apex logo" className="logo-ticker-image" />
+            {/* Logos — repetición para loop continuo */}
+            <Image src={ankiLogo} alt="Anki logo" className="logo-ticker-image" />
+            <Image src={notionLogo} alt="Notion logo" className="logo-ticker-image" />
+            <Image src={pythonLogo} alt="Python logo" className="logo-ticker-image" />
+            <Image src={sqlLogo} alt="SQL logo" className="logo-ticker-image" />
+            <Image src={tensorFlowLogo} alt="TensorFlow logo" className="logo-ticker-image" />
+            <Image src={cLogo} alt="C logo" className="logo-ticker-image" />
+            <Image src={cppLogo} alt="C++ logo" className="logo-ticker-image" />
           </motion.div>
         </div>
       </div>

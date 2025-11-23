@@ -1,72 +1,71 @@
 "use client";
-import avatar1 from "@/assets/avatar-1.png";
-import avatar2 from "@/assets/avatar-2.png";
-import avatar3 from "@/assets/avatar-3.png";
-import avatar4 from "@/assets/avatar-4.png";
-import avatar5 from "@/assets/avatar-5.png";
-import avatar6 from "@/assets/avatar-6.png";
-import avatar7 from "@/assets/avatar-7.png";
-import avatar8 from "@/assets/avatar-8.png";
-import avatar9 from "@/assets/avatar-9.png";
+import avatar1 from "@/assets/profile-picture-Eric.png";
+import avatar2 from "@/assets/profile-picture-Nil.webp";
+import avatar3 from "@/assets/profile-picture-Nil.webp";
+import avatar4 from "@/assets/profile-picture-Davud.png";
+import avatar5 from "@/assets/profile-picture-Pol.png";
+import avatar6 from "@/assets/profile-picture-janbo.png";
+import avatar7 from "@/assets/profile-picture-Nil.webp";
+import avatar8 from "@/assets/mariateresa-profile-picture.png";
+import avatar9 from "@/assets/profile-picture-berni.png";
 import Image from "next/image";
-import React, { use } from "react";
-import { twMerge } from "tailwind-merge";
+import React from "react";
 import { motion } from "framer-motion";
 
 const testimonials = [
   {
-    text: "As a seasoned designer always on the lookout for innovative tools, Framer.com instantly grabbed my attention.",
+    text: "Sempre va estar disponible per resoldre els meus dubtes de qualsevol assignatura, fins i tot fora d'horari de classes i sempre es va adaptar a les meves necessitats. Super Recomanable",
     imageSrc: avatar1.src,
-    name: "Jamie Rivera",
-    username: "@jamietechguru00",
+    name: "Eric ",
+    username: "@eric",
   },
   {
-    text: "Our team's productivity has skyrocketed since we started using this tool. ",
+    text: "Aquest es el segon curs que treballo amb ell. I he aconseguit anar aprovant les matemàtiques malgrat començar justet jajajja merciiiiii Jaaan.",
     imageSrc: avatar2.src,
-    name: "Josh Smith",
-    username: "@jjsmith",
+    name: "Nil folqueres",
+    username: "@Nilfoldun",
   },
   {
-    text: "This app has completely transformed how I manage my projects and deadlines.",
+    text: "Inicialmente era un poco exceptico con la efectividad de los métodos que comentaba, creía que no era lo que necesitaba, sino poner más empeño. Peró mereció la pena darle la oportunidad.",
     imageSrc: avatar3.src,
-    name: "Morgan Lee",
-    username: "@morganleewhiz",
+    name: "Marcos Gutierrez",
+    username: "@josemielpez",
   },
   {
-    text: "I was amazed at how quickly we were able to integrate this app into our workflow.",
+    text: "Ha ayudado a mi Hijo a aprobar 2n de bachillerato y sacar la nota que necesitaba en bachillerato, muy buen profesor y siempre muy educado.",
     imageSrc: avatar4.src,
-    name: "Casey Jordan",
-    username: "@caseyj",
+    name: "David Garcia",
+    username: "@davidd1974",
   },
   {
-    text: "Planning and executing events has never been easier. This app helps me keep track of all the moving parts, ensuring nothing slips through the cracks.",
+    text: "Estoy estudiando relaciones laborales, inicialmente me había costado poder seguir el ritmo de memorización, peró un poco de hábito y empezar a usar anki como me has enseñado ha sido clave, graciaas.",
     imageSrc: avatar5.src,
-    name: "Taylor Kim",
-    username: "@taylorkimm",
+    name: "Pol Moya",
+    username: "@pol_mf",
   },
   {
-    text: "The customizability and integration capabilities of this app are top-notch.",
+    text: "Mooolt recomanable, els tests diaris, juntament amb el anki, m'ha ajudat a tenir un feeback constant per identificar les areas que necesitava treballar i ser més efectiu.",
     imageSrc: avatar6.src,
-    name: "Riley Smith",
-    username: "@rileysmith1",
+    name: "Jan Bonhora",
+    username: "@janboooo04",
   },
   {
-    text: "Adopting this app for our team has streamlined our project management and improved communication across the board.",
+    text: "Amb ell al seu costat mentre estudiava 2n de batxillerat he aconesguit després de suspendre 4 assignatures el primer trimestre, acabar aprovant-ho tot sense anar a recuuus. Moltes gràcies Jaaaan, les teves explicacions i els mindmaps eren just el que necesitava, no podría haver-ho fet sense tuuu!",
     imageSrc: avatar7.src,
-    name: "Jordan Patels",
-    username: "@jpatelsdesign",
+    name: "Marcel",
+    username: "@Marcel_cas07",
   },
   {
-    text: "With this app, we can easily assign tasks, track progress, and manage documents all in one place.",
+    text: "Muchas gracias Jan por ayudar tanto al Pol quedamos muy contentos :)",
     imageSrc: avatar8.src,
-    name: "Sam Dawson",
-    username: "@dawsontechtips",
+    name: "Maria Teresa",
+    username: "@mariiiiteree75",
   },
   {
-    text: "Its user-friendly interface and robust features support our diverse needs.",
+    text: "No estaba seguro de que necesitara cambiar mi forma de trabajar pero al final no solo me ha ayudado a entenderlo todo sino a ser más productivo, grandeee Jaaaan jajajaj.",
     imageSrc: avatar9.src,
-    name: "Casey Harper",
-    username: "@casey09",
+    name: "Bernat Martin",
+    username: "@berniifn",
   },
 ];
 
@@ -82,9 +81,7 @@ const TestimonialsColumn = (props: {
   return (
     <div className={props.className}>
       <motion.div
-        animate={{
-          translateY: "-50%",
-        }}
+        animate={{ translateY: "-50%" }}
         transition={{
           duration: props.duration || 10,
           repeat: Infinity,
@@ -93,30 +90,28 @@ const TestimonialsColumn = (props: {
         }}
         className="flex flex-col gap-6 pb-6"
       >
-        {[
-          ...new Array(2).fill(0).map((_, index) => (
-            <React.Fragment key={index}>
-              {props.testimonials.map(({ text, imageSrc, name, username }) => (
-                <div className="card" key={username}>
-                  <div>{text}</div>
-                  <div className="flex items-center gap-2 mt-5">
-                    <Image
-                      width={40}
-                      height={40}
-                      src={imageSrc}
-                      alt={name}
-                      className="h-10 w-10 rounded-full"
-                    />
-                    <div className="flex flex-col">
-                      <div className="font-medium tracking-tight leading-5">{name}</div>
-                      <div className="leading-5 tracking-tight">{username}</div>
-                    </div>
+        {[...new Array(2).fill(0)].map((_, index) => (
+          <React.Fragment key={index}>
+            {props.testimonials.map(({ text, imageSrc, name, username }) => (
+              <div className="card bg-gray-50 p-4 rounded-lg shadow" key={username}>
+                <div>{text}</div>
+                <div className="flex items-center gap-2 mt-5">
+                  <Image
+                    width={40}
+                    height={40}
+                    src={imageSrc}
+                    alt={name}
+                    className="h-10 w-10 rounded-full"
+                  />
+                  <div className="flex flex-col">
+                    <div className="font-medium tracking-tight leading-5">{name}</div>
+                    <div className="leading-5 tracking-tight text-gray-500">{username}</div>
                   </div>
                 </div>
-              ))}
-            </React.Fragment>
-          )),
-        ]}
+              </div>
+            ))}
+          </React.Fragment>
+        ))}
       </motion.div>
     </div>
   );
@@ -124,21 +119,22 @@ const TestimonialsColumn = (props: {
 
 export const Testimonials = () => {
   return (
-    <section className="bg-white">
-      <div className="container">
-        <div className="section-heading">
+    <section className="bg-white pt-24"> {/* Más espacio superior */}
+      <div className="container mx-auto">
+        <div className="section-heading mb-12">
           <div className="flex justify-center">
             <div className="tag">Testimonials</div>
           </div>
 
-          <h2 className="section-title mt-5">What our users say</h2>
-          <p className="section-des mt-5">
-            From intuitive design to powerful features, out app has become an essential tool for users around
-            the world.
+          <h2 className="section-title mt-5 text-center">
+            Lee lo que dicen las personas que confiaron en mi
+          </h2>
+          <p className="section-des mt-5 text-center">
+            Para entrar en tu carrera soñada o aprobar ese grado medio, lo verdaderamente importante, es que acabes siendo independiente.
           </p>
         </div>
 
-        <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
+        <div className="flex justify-center gap-6 mt-10 max-h-[740px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
           <TestimonialsColumn testimonials={firstColumn} duration={15} />
           <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
           <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
@@ -147,3 +143,4 @@ export const Testimonials = () => {
     </section>
   );
 };
+

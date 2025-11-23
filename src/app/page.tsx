@@ -6,18 +6,36 @@ import { LogoTicker } from "@/sections/LogoTicker";
 import { Pricing } from "@/sections/Pricing";
 import { ProductShowcase } from "@/sections/ProductShowcase";
 import { Testimonials } from "@/sections/Testimonials";
+import SobreMi from "@/sections/aboutme";
 
 export default function Home() {
   return (
     <div>
+      {/* Inicio */}
       <Header />
-      <Hero />
+
+      <section id="inicio" className="scroll-mt-32">
+        <Hero />
+      </section>
+
       <LogoTicker />
       <ProductShowcase />
       <Pricing />
+
+      {/* Sección Sobre mí */}
+      <section id="sobremi" className="scroll-mt-32">
+        <SobreMi />
+      </section>
+
       <Testimonials />
-      <CallToAction />
+
+      {/* Sección Call To Action */}
+      <section id="contacta" className="scroll-mt-32">
+        <CallToAction />
+      </section>
+
       <Footer />
     </div>
   );
 }
+

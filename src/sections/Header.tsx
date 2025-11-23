@@ -1,37 +1,46 @@
 import ArrowRight from "@/assets/arrow-right.svg";
-import Logo from "@/assets/logosaas.png";
+import Logo from "@/assets/firma.jpeg";
 import Image from "next/image";
 import MenuIcon from "@/assets/menu.svg";
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 backdrop-blur-sm z-20">
-      <div className="flex justify-center items-center py-3 bg-black text-white text-sm gap-3">
-        <p className="text-white/60 hidden md:block">Streamline your workflow and boost your productvity</p>
-        <div className="inline-flex gap-1 items-center">
-          <p>Get started for free</p>
-          <ArrowRight className="h-4 w-4 inline-flex justify-center items-center" />
-        </div>
+    <header className="sticky top-0 backdrop-blur-sm z-20 bg-white shadow-sm">
+      {/* Barra superior con tu nombre */}
+      <div className="flex justify-end items-center py-2 px-6 bg-gray-100 text-black text-sm">
+        <p className="font-medium">Jan Gómez Escobar</p>
       </div>
 
+      {/* Barra principal */}
       <div className="py-5">
-        <div className="container">
-          <div className="flex items-center justify-between">
-            <Image src={Logo} alt="Saas logo" height={40} width={40} />
-            <MenuIcon className="h-5 w-5 md:hidden" />
-            <nav className="hidden md:flex gap-6 text-black/60 items-center">
-              <a href="">About</a>
-              <a href="">Features</a>
-              <a href="">Custmers</a>
-              <a href="">Updates</a>
-              <a href="">Help</a>
-              <button className="bg-black text-white px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center tracking-tight">
-                Get for free
-              </button>
-            </nav>
-          </div>
+        <div className="container flex items-center justify-between">
+          {/* Logo */}
+          <Image src={Logo} alt="Logo Jan Gómez Escobar" height={80} width={80} />
+
+          {/* Menú para móviles */}
+          <MenuIcon className="h-5 w-5 md:hidden" />
+
+          {/* Navegación */}
+          <nav className="hidden md:flex gap-6 items-center">
+            <a href="#inicio" className="text-black/80 hover:text-black font-medium">
+              Inicio
+            </a>
+
+            <a href="#sobremi" className="text-black/80 hover:text-black font-medium">
+              Sobre mí
+            </a>
+
+            <a
+              href="#contacta"
+              className="bg-[#001738] text-white px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center gap-1"
+            >
+              Descubre cómo puedo ayudarte
+              <ArrowRight className="h-4 w-4 inline-flex" />
+            </a>
+          </nav>
         </div>
       </div>
     </header>
   );
 };
+
