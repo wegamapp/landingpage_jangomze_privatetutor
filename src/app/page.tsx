@@ -6,7 +6,7 @@ import { LogoTicker } from "@/sections/LogoTicker";
 import { Pricing } from "@/sections/Pricing";
 import { ProductShowcase } from "@/sections/ProductShowcase";
 import { Testimonials } from "@/sections/Testimonials";
-import SobreMi from "@/sections/aboutme";
+import SobreMi from "@/sections/AboutMe";
 
 export default function Home() {
   return (

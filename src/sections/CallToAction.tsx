@@ -1,5 +1,5 @@
 "use client";
-import ArrowRight from "@/assets/arrow-right.svg";
+import Image from "next/image"; // Aseguramos la importación de Image
 import starImage from "@/assets/star.png";
 import springImage from "@/assets/spring.png";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -22,15 +22,19 @@ export const CallToAction = () => {
     mensaje: "",
   });
 
+  // Estado para el manejo de mensajes (reemplazo de alert())
+  const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage(null); // Limpiar mensaje anterior
 
-  // Construir mensaje
-  const mensaje = `
+    // Construir mensaje
+    const mensaje = `
 Hola, soy ${formData.nombre}.
 Email: ${formData.email}
 Teléfono: ${formData.telefono}
@@ -40,20 +44,37 @@ Mensaje:
 ${formData.mensaje}
 `;
 
-  // Enviar email al endpoint
-  const emailRes = await fetch("/api/contact", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData),
-  });
+    // Enviar email al endpoint
+    try {
+      const emailRes = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-  if (!emailRes.ok) {
-    alert("❌ Error enviando el correo. Reinicia la pagina.");
-    return;
-  }
+      if (!emailRes.ok) {
+        // Reemplazo de alert()
+        setMessage({ type: 'error', text: "❌ Error enviando el correo. Reinicia la pagina." });
+        console.error("Error en la respuesta del API:", emailRes.status);
+        return;
+      }
 
-  alert("✔ Mensaje enviado correctamente!");
-};
+      // Reemplazo de alert()
+      setMessage({ type: 'success', text: "✔ Mensaje enviado correctamente!" });
+      setFormData({
+        nombre: "",
+        email: "",
+        telefono: "",
+        tipoContacto: "alumno",
+        mensaje: "",
+      });
+
+    } catch (error) {
+      // Reemplazo de alert()
+      setMessage({ type: 'error', text: "❌ Fallo de red. Inténtalo de nuevo más tarde." });
+      console.error("Error al enviar el formulario:", error);
+    }
+  };
 
 
   return (
@@ -68,7 +89,7 @@ ${formData.mensaje}
             Empieza a conseguir esos resultados
           </h2>
 
-          {/* Imágenes animadas */}
+          {/* Imágenes animadas (PNGs/JPGs mantienen su método de importación) */}
           <motion.img
             src={starImage.src}
             alt="star image"
@@ -90,6 +111,18 @@ ${formData.mensaje}
           onSubmit={handleSubmit}
           className="max-w-2xl mx-auto mt-12 bg-white shadow-lg rounded-lg p-8 text-left"
         >
+          {/* Mensaje de estado (reemplazo de alert) */}
+          {message && (
+            <div
+              className={`p-4 mb-4 rounded-lg text-center font-semibold ${
+                message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+              }`}
+              role="alert"
+            >
+              {message.text}
+            </div>
+          )}
+
           {/* Nombre */}
           <div className="mb-5">
             <label className="block text-gray-700 font-semibold mb-2">
@@ -175,7 +208,14 @@ ${formData.mensaje}
               className="btn btn-primary px-8 py-3 flex items-center gap-2"
             >
               <span>Enviar</span>
-              <ArrowRight className="h-5 w-5" />
+              {/* SVG MODIFICADO a next/image */}
+              <Image 
+                src="/images/arrow-right.svg"
+                alt="Flecha derecha"
+                width={20} // Corresponde al h-5 w-5
+                height={20} // Corresponde al h-5 w-5
+                className="h-5 w-5" 
+              />
             </button>
           </div>
         </form>
