@@ -11,6 +11,7 @@ import avatar9 from "@/assets/profile-picture-berni.png";
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const testimonials = [
   {
@@ -118,19 +119,21 @@ const TestimonialsColumn = (props: {
 };
 
 export const Testimonials = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="bg-white pt-24"> {/* Más espacio superior */}
       <div className="container mx-auto">
         <div className="section-heading mb-12">
           <div className="flex justify-center">
-            <div className="tag">Testimonials</div>
+            <div className="tag">{t("testimonials.tag")}</div>
           </div>
 
           <h2 className="section-title mt-5 text-center">
-            Lee lo que dicen las personas que confiaron en mi
+            {t("testimonials.titulo")}
           </h2>
           <p className="section-des mt-5 text-center">
-            Para entrar en tu carrera soñada o aprobar ese grado medio, lo verdaderamente importante, es que acabes siendo independiente.
+            {t("testimonials.descripcion")}
           </p>
         </div>
 

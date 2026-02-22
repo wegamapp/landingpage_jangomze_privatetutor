@@ -12,43 +12,17 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import freeContentImg from "@/assets/youtube3dicon.png";
 import methodologyImg from "@/assets/gorro_graduacion.png";
 import resultsImg from "@/assets/trophy-front-color.png";
+import softwareImg from "@/assets/cog.png";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const helpBoxes = [
-  {
-    image: freeContentImg,
-    title: "Contenido gratuito",
-    text: "Descubre mi canal de YouTube con contenido <span class='text-[#3B82F6] font-semibold'>gratuito</span> para mejorar tus habilidades y rendimiento académico.",
-    button: {
-      label: "Mi canal de YouTube",
-      url: "https://www.youtube.com/@jangomezee",
-    },
-  },
-  {
-    image: methodologyImg,
-    title: "Metodología probada",
-    text: "Aprende con una metodología <span class='text-[#3B82F6] font-semibold'>efectiva</span> que te garantiza <span class='text-[#3B82F6] font-semibold'>resultados concretos y duraderos</span> en tu aprendizaje. Domina técnicas de alto impacto como la <span class='font-semibold'>Feynman Technique</span>, <span class='font-semibold'>Spaced Repetition</span>, <span class='font-semibold'>Cornell Method</span> o <span class='font-semibold'>Mind Mapping</span> para potenciar tu estudio.",
-    button: {
-      label: "Mira las fuentes",
-      pdf: "/Multiple_Bibliographies_study_techniques.pdf", // PDF en la carpeta public
-      download: false, // si quieres descargar, pon true
-    },
-  },
-  {
-    image: resultsImg,
-    title: "Adaptabilidad",
-    text: `Como estudiante de <span class="text-blue-600 font-semibold">Matemáticas Computacionales</span> y apasionado de economía, empresa e historia, ofrezco un apoyo excepcional en estas materias y en las evaluadas en PAU y grados medios.  
-Con una <span class="text-blue-600 font-semibold">media de 9,25 en bachillerato</span> y nivel <span class="text-blue-600 font-semibold">B2 de inglés</span>, te guío de forma práctica y personalizada para que aprendas, disfrutes y domines cada asignatura.`,
-    button: null, // eliminamos el botón aquí
-  }
-];
-
 export const Pricing = () => {
+  const { t } = useLanguage();
   const [userScore, setUserScore] = useState(6);
   const averageImprovement = 0.422;
 
@@ -64,14 +38,14 @@ export const Pricing = () => {
     labels: ["Tiempo 0", "Tiempo 1"],
     datasets: [
       {
-        label: "Tu nota actual",
+        label: t("pricing.tuNotaActual"),
         data: [userScore, userScore],
         borderColor: "#F87171",
         backgroundColor: "#F87171",
         tension: 0.3,
       },
       {
-        label: "Nota proyectada con metodología",
+        label: t("pricing.notaProyectadaMetodologia"),
         data: [userScore, projectedScore()],
         borderColor: "#3B82F6",
         backgroundColor: "#3B82F6",
@@ -84,22 +58,67 @@ export const Pricing = () => {
     responsive: true,
     plugins: {
       legend: { position: "top" },
-      title: { display: true, text: "Proyección de nota usando técnicas de aprendizaje" },
+      title: { display: true, text: t("pricing.proyeccionNota") },
     },
     scales: { y: { beginAtZero: true, max: 10 } },
   };
 
+  // Construir el texto de metodología con el enlace en "probada"
+  const metodologiaText = () => {
+    const baseText = t("pricing.metodologia.texto");
+    const probadaText = t("pricing.metodologia.probada");
+    // Enlace "probada" al documento de fuentes (PDF)
+    const pdfUrl = "/Multiple_Bibliographies_study_techniques.pdf";
+    const linkHtml = `<a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" class="text-[#3B82F6] font-semibold underline hover:text-blue-700">${probadaText}</a>`;
+    
+    // Buscar y reemplazar la palabra "probada" en el texto (case-insensitive)
+    const regex = new RegExp(`\\b${probadaText}\\b`, 'gi');
+    return baseText.replace(regex, linkHtml);
+  };
+
+  const helpBoxes = [
+    {
+      image: freeContentImg,
+      title: t("pricing.contenidoGratuito.titulo"),
+      text: t("pricing.contenidoGratuito.texto"),
+      button: null,
+    },
+    {
+      image: methodologyImg,
+      title: t("pricing.metodologia.titulo"),
+      text: metodologiaText(),
+      button: null,
+    },
+    {
+      image: resultsImg,
+      title: t("pricing.adaptabilidad.titulo"),
+      text: t("pricing.adaptabilidad.texto"),
+      button: null,
+      isScoreBox: true,
+    },
+    {
+      image: softwareImg,
+      imageSrc: "/images/logo-tutortrack.png",
+      imageAlt: "TutorTrack",
+      title: t("pricing.softwarePersonalizado.titulo"),
+      text: t("pricing.softwarePersonalizado.texto"),
+      button: null,
+      featured: true, // <--- Nueva bandera para identificarlo
+      customClass: "scale-200 z-10 shadow-xl border-2 border-blue-500" // Ejemplo de énfasis
+    },
+  ];
+
   return (
-    <section className="py-24 bg-white">
+    <section id="pricing" className="scroll-mt-28 py-24 bg-white">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-[#001738]">
-          ¿Cómo te puedo ayudar?
+          {t("pricing.titulo")}
         </h2>
 
         <div className="flex flex-col gap-12 md:gap-16">
-          {helpBoxes.map(({ image, title, text, button }, index) => {
+          {helpBoxes.map(({ image, imageSrc, imageAlt, title, text, button, isScoreBox }, index) => {
             const isReversed = index % 2 === 1;
-            const isScoreBox = title === "Adaptabilidad";
+            const imgAlt = imageAlt ?? title;
 
             return (
               <div
@@ -109,11 +128,15 @@ export const Pricing = () => {
                 }`}
               >
                 <div
-                  className={`flex-shrink-0 mb-6 md:mb-0 ${
+                  className={`relative flex-shrink-0 mb-6 md:mb-0 ${
                     index === 0 ? "w-32 h-32 md:mr-12" : "w-48 h-48 md:mx-8"
                   }`}
                 >
-                  <Image src={image} alt={title} className="w-full h-full object-contain rounded-xl" />
+                  {imageSrc ? (
+                    <Image src={imageSrc} alt={imgAlt} fill className="object-contain rounded-xl" />
+                  ) : (
+                    <Image src={image} alt={title} className="w-full h-full object-contain rounded-xl" />
+                  )}
                 </div>
 
                 <div className="flex-1 text-center md:text-left">
@@ -126,7 +149,7 @@ export const Pricing = () => {
                   {isScoreBox && (
                     <div className="flex flex-col md:flex-row md:items-center md:gap-6">
                       <div className="flex flex-col mb-4 md:mb-0">
-                        <label className="font-semibold mb-2">Tu nota actual:</label>
+                        <label className="font-semibold mb-2">{t("pricing.notaActual")}</label>
                         <input
                           type="number"
                           min={0}
@@ -137,10 +160,10 @@ export const Pricing = () => {
                           className="border rounded px-3 py-1 w-24"
                         />
                         <p className="mt-2">
-                          Nota proyectada: <strong>{projectedScore()}</strong> / 10
+                          {t("pricing.notaProyectadaTexto")} <strong>{projectedScore()}</strong> / 10
                         </p>
                         <p className="text-sm text-gray-500 italic mt-1">
-                          * Esta función es una aproximación, modeliza el rendimiento como decreciente y aplica un improvement base inferido.
+                          {t("pricing.aproximacion")}
                         </p>
                       </div>
 
@@ -150,21 +173,19 @@ export const Pricing = () => {
                     </div>
                   )}
 
-                  {button && button.label && (
-                    <a
-                      href={button.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      download={button.download}
-                      className="inline-block bg-[#001738] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#002d6d] transition-colors mt-4"
-                    >
-                      {button.label}
-                    </a>
-                  )}
                 </div>
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-16 text-center">
+          <a
+            href="#contacta"
+            className="inline-flex items-center justify-center rounded-lg border-2 border-[#001738] bg-transparent px-6 py-3 text-base font-semibold text-[#001738] transition-all duration-300 hover:bg-[#001738] hover:text-white"
+          >
+            {t("pricing.ctaReserva")}
+          </a>
         </div>
       </div>
     </section>

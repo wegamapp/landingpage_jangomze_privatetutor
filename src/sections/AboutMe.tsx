@@ -5,27 +5,28 @@ import fotolondres from "@/assets/fotolondres.jpg";
 import fotosentadocontento from "@/assets/foto_sentado_sonriente.jpg";
 import fotoestudio from "@/assets/fotoestudio.jpg";
 import { FaCheck } from "react-icons/fa";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const blocks = [
+const getBlocks = (t: (key: string) => string) => [
   {
-    title: "Sobre mí",
+    title: t("aboutMe.sobreMi.titulo"),
     texts: [
-      "Soy un apasionado de la libertad y, por ello, me entusiasma compartir todas las herramientas que me permiten vivirla plenamente: las matemáticas aplicadas, la educación y la tecnología. Desde que entré en la educación superior, he buscado formas de hacer que aprender sea más accesible, práctico y estimulante para todas las personas.",
-      "Actualmente combino mi formación académica con proyectos orientados a democratizar la libertad financiera, de expresión y, sobre todo, de pensamiento. Mi objetivo es ayudar, especialmente a los estudiantes, a desarrollar su máximo potencial mediante metodologías innovadoras que hagan del aprendizaje una experiencia transformadora."
+      t("aboutMe.sobreMi.texto1"),
+      t("aboutMe.sobreMi.texto2")
     ],
   },
   {
-    title: "Mi experiencia",
+    title: t("aboutMe.experiencia.titulo"),
     texts: [
-      "He trabajado con diversidad de estudiantes de distintos niveles, aplicando estrategias personalizadas de aprendizaje y optimización del rendimiento académico.",
-      "Mi objetivo es crear sistemas educativos más eficientes, que midan y potencien el progreso real de cada alumno. Con mucho trabajo si, pero siempre buscando adaptar la metodología al alumno, no el alumno a la metodología."
+      t("aboutMe.experiencia.texto1"),
+      t("aboutMe.experiencia.texto2")
     ],
   },
   {
-    title: "En la actualidad",
+    title: t("aboutMe.actualidad.titulo"),
     texts: [
-      "Sigo formándome en Matemáticas Computacionales, desarrollando proyectos de emprendimiento DEFI, finanzas y educativo y compartiendo contenido de valor para estudiantes en redes.",
-      "Mi propósito es inspirar a otros a encontrar su mejor versión a través del conocimiento y la constancia."
+      t("aboutMe.actualidad.texto1"),
+      t("aboutMe.actualidad.texto2")
     ],
   }
 ];
@@ -34,13 +35,15 @@ const blocks = [
 const images = [fotosentadocontento, fotoestudio, fotolondres];
 
 export default function SobreMi() {
+  const { t } = useLanguage();
+  const blocks = getBlocks(t);
+  
   return (
     <section className="min-h-screen bg-[#e8ebef] py-24 px-6">
       <div className="container mx-auto">
         {/* Título principal */}
         <h1 className="text-3xl md:text-4xl font-bold text-black text-center mb-24">
-          Soy Jan Gómez Escobar, Estudiante de Matemáticas Computacionales,
-          emprendedor y experto en educación.
+          {t("aboutMe.titulo")}
         </h1>
 
         {blocks.map((block, index) => {

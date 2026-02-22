@@ -1,0 +1,41 @@
+{
+  "cta": {
+    "errors": {
+      "select_slot": "Please select a time slot",
+      "invalid_date": "You can only book from tomorrow up to a maximum of 2 weeks ahead."
+    },
+    "contact_whatsapp": "Contact on WhatsApp",
+    "location_title": "Location",
+    "location_val": "Biblioteca Jaume Fuster Lesseps",
+    "location_negotiable": "(location can be negotiated)",
+    "bring_title": "What to bring",
+    "bring_val": "Notes for the subject to review, textbook for the subject in question, laptop or device if using classroom or similar, pencil case with all necessary items, chargers, sample solved exercises or past exams.",
+    "policy_title": "Cancellation",
+    "policy_val": "24h notice required.",
+    "whatsapp_note": "You can also contact us on WhatsApp for quick questions."
+  },
+  "emails": {
+    "confirmation": {
+      "subject": "Booking confirmed, {nombre}!",
+      "greeting": "Hi {nombre},",
+      "thanks": "Thank you for booking your class. Here is your appointment confirmation.",
+      "details_title": "Booking details",
+      "date_time_label": "Date and time",
+      "location_label": "Location",
+      "contact_before": "If you want to discuss any aspect of the class before the appointment, you can reach me by phone: {phone}",
+      "bring_label": "What to bring",
+      "policy_label": "Cancellation policy",
+      "footer": "See you soon.",
+      "whatsapp_button": "Contact on WhatsApp"
+    },
+    "reminder": {
+      "subject": "Reminder: your class is tomorrow — TutorTrack",
+      "greeting": "Hi {nombre},",
+      "intro": "This is a reminder that your class is scheduled for:",
+      "date_time_label": "Date and time",
+      "policy_note": "If you need to cancel or change the time, please let us know at least 24 hours in advance.",
+      "footer": "See you soon.",
+      "whatsapp_button": "Contact on WhatsApp"
+    }
+  }
+}

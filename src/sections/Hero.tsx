@@ -3,8 +3,10 @@ import fotolateral from "@/assets/mirando_al_lateral.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { RotatingTextCircle } from "@/components/RotatingTextCircle";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Hero = () => {
+  const { t } = useLanguage();
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -28,26 +30,36 @@ export const Hero = () => {
           {/* ----------- TEXTO ----------- */}
           <div className="md:w-[478px]">
             <h2 className="text-lg md:text-xl font-bold text-black mt-2 tracking-wide">
-              SOY JAN GÓMEZ ESCOBAR
+              {t("hero.soy")}
             </h2>
 
             <div className="lg:w-2/3 md:w-full">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">
-                Aprende a estudiar de forma efectiva y alcanza la carrera de
+                {t("hero.titulo")}
                 <span className="inline bg-blue-200 text-black px-0.5 py-0.5">
                   {" "}
-                  tus sueños.
+                  {t("hero.tusSueños")}
                 </span>
               </h2>
             </div>
 
             <div className="flex gap-1 items-center mt-[30px]">
-              <button className="btn btn-primary">
-                Descubre cómo puedo ayudarte
-              </button>
-              <button className="btn btn-text flex gap-1">
-                <span>Learn more</span>
-              </button>
+              <motion.a
+                href="#contacta"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn btn-primary transition-all duration-300"
+              >
+                {t("hero.descubreAyuda")}
+              </motion.a>
+              <motion.a
+                href="#pricing"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn btn-text flex gap-1 transition-all duration-300"
+              >
+                <span>{t("hero.learnMore")}</span>
+              </motion.a>
             </div>
           </div>
 

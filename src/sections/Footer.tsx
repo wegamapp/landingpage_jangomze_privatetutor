@@ -1,3 +1,4 @@
+"use client";
 import logo from "@/assets/firma.jpeg";
 // ELIMINADAS: Las siguientes importaciones directas de SVG han sido reemplazadas
 // import SocialX from "@/assets/social-x.svg";
@@ -6,6 +7,7 @@ import logo from "@/assets/firma.jpeg";
 // import SocialPin from "@/assets/social-pin.svg";
 // import SocialYoutube from "@/assets/social-youtube.svg";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Definimos los datos de los iconos sociales para una fácil iteración
 const socialIcons = [
@@ -22,7 +24,7 @@ const socialIcons = [
   { 
     name: "YouTube", 
     src: "/images/social-youtube.svg", 
-    href: "https://youtube.com/tu_canal" 
+    href: "https://www.youtube.com/@jangomezee" 
   },
   // Si deseas agregar X/Twitter o Pinterest más tarde, puedes descomentar:
   // { name: "X (Twitter)", src: "/images/social-x.svg", href: "https://x.com/tu_usuario" },
@@ -30,6 +32,8 @@ const socialIcons = [
 ];
 
 export const Footer = () => {
+  const { t } = useLanguage();
+  
   return (
     <footer className="bg-black text-[#BCBCBC] text-sm py-10 text-center">
       <div className="container mx-auto px-4">
@@ -60,7 +64,7 @@ export const Footer = () => {
         
         {/* Nota: La imagen de logo importada (firma.jpeg) no se usa en este JSX, pero se mantiene la importación */}
         
-        <p className="mt-6">&copy; 2025 jangomeze, Inc. All rights reserved.</p>
+        <p className="mt-6">{t("footer.derechos")}</p>
       </div>
     </footer>
   );

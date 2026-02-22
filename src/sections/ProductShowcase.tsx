@@ -1,8 +1,10 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const ProductShowcase = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -14,23 +16,23 @@ export const ProductShowcase = () => {
   const features = [
     {
       emoji: "🧠",
-      title: "Aprende mejor",
-      text: "Descubre cómo entender y retener información con nuevas técnicas diarias, científicamente validadas.",
+      title: t("productShowcase.aprendeMejor.titulo"),
+      text: t("productShowcase.aprendeMejor.texto"),
     },
     {
       emoji: "📝",
-      title: "Toma notas efectivas",
-      text: "Convierte tus apuntes en una herramienta real de aprendizaje y no solo de referencia.",
+      title: t("productShowcase.tomaNotas.titulo"),
+      text: t("productShowcase.tomaNotas.texto"),
     },
     {
       emoji: "⏰",
-      title: "Crea hábitos sólidos",
-      text: "Descubre como formar rutinas que te impulsen a mejorar cada día y alcanzar tus objetivos académicos.",
+      title: t("productShowcase.creaHabitos.titulo"),
+      text: t("productShowcase.creaHabitos.texto"),
     },
     {
       emoji: "📊",
-      title: "Mide tu progreso",
-      text: "Realiza test diarios, valida tus resultados y observa cómo evoluciona tu rendimiento para mejorar de forma constante.",
+      title: t("productShowcase.mideProgreso.titulo"),
+      text: t("productShowcase.mideProgreso.texto"),
     }  
   ];
 
@@ -42,13 +44,13 @@ export const ProductShowcase = () => {
       <div className="container">
         <div className="max-w-[640px] mx-auto text-center">
           <div className="flex justify-center">
-            <div className="tag">Aumenta tu productividad y eficacia</div>
+            <div className="tag">{t("productShowcase.tag")}</div>
           </div>
 
           <h2 className="text-2xl md:text-[42px] md:leading-[48px] font-bold tracking-tight bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-5">
-            Aprender a aprender: la habilidad que transforma{" "}
+            {t("productShowcase.titulo")}{" "}
             <span className="underline decoration-[#3B82F6] decoration-4 underline-offset-4">
-              todas las áreas de tu vida
+              {t("productShowcase.todasAreas")}
             </span>
             .
           </h2>

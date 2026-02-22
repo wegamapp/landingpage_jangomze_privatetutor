@@ -1,0 +1,41 @@
+{
+  "cta": {
+    "errors": {
+      "select_slot": "Si us plau, selecciona un horari",
+      "invalid_date": "Només pots reservar des de demà i fins a un màxim de 2 setmanes vista."
+    },
+    "contact_whatsapp": "Contactar per WhatsApp",
+    "location_title": "Ubicació",
+    "location_val": "Biblioteca Jaume Fuster Lesseps",
+    "location_negotiable": "(es pot negociar la ubicació)",
+    "bring_title": "Què portar",
+    "bring_val": "Apunts assignatura a repassar, llibre assignatura en qüestió, ordinador o dispositiu en cas d'usar classroom o similars, estoig amb tots els elements necessaris, carregadors, exemples d'exercicis resolts o exàmens passats.",
+    "policy_title": "Cancel·lació",
+    "policy_val": "Avís de 24h.",
+    "whatsapp_note": "També pots contactar-nos per WhatsApp per a dubtes ràpids."
+  },
+  "emails": {
+    "confirmation": {
+      "subject": "Reserva confirmada, {nombre}!",
+      "greeting": "Hola {nombre},",
+      "thanks": "Gràcies per reservar la teva classe. Aquesta és la confirmació de la teva cita.",
+      "details_title": "Detalls de la reserva",
+      "date_time_label": "Data i hora",
+      "location_label": "Lloc",
+      "contact_before": "Si vols comentar o discutir algun aspecte de la classe abans de la cita, em pots contactar per telèfon: {phone}",
+      "bring_label": "Què portar",
+      "policy_label": "Política de cancel·lació",
+      "footer": "Ens veiem aviat.",
+      "whatsapp_button": "Contactar per WhatsApp"
+    },
+    "reminder": {
+      "subject": "Recordatori: la teva classe és demà — TutorTrack",
+      "greeting": "Hola {nombre},",
+      "intro": "Et recordem que la teva classe està programada per a:",
+      "date_time_label": "Data i hora",
+      "policy_note": "Si necessites cancel·lar o canviar l'horari, avisa'ns amb almenys 24 hores d'antelació.",
+      "footer": "Ens veiem aviat.",
+      "whatsapp_button": "Contactar per WhatsApp"
+    }
+  }
+}
