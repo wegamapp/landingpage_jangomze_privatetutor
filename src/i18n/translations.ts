@@ -15,10 +15,21 @@ export const translations: Record<string, Record<string, any>> = {
     },
     pricing: {
       titulo: "¿Cómo te puedo ayudar?",
-      contenidoGratuito: {
-        titulo: "Contenido gratuito",
-        texto: "Descubre mis <a href='/links' class='text-[#3B82F6] font-semibold underline hover:text-blue-700'>redes sociales</a> con contenido <span class='text-[#3B82F6] font-semibold'>gratuito</span> para mejorar tus habilidades y rendimiento académico.",
-        boton: "Mis redes sociales",
+      roadmap: {
+        title: "Tu Hoja de Ruta hacia la Universidad",
+        description: "El camino hacia el grado de tus sueños (ya sea en España o en Australia) requiere más que codos; requiere estrategia. Sustituimos el ruido de las redes por <span class='text-[#3B82F6] font-semibold'>conocimiento exhaustivo</span> aplicado a los exámenes más exigentes del mundo:",
+        item1: {
+          title: "Dominio del Bachillerato Internacional",
+          text: "Analizamos las rúbricas de evaluación interna y externa para que sepas exactamente qué espera el examinador.",
+        },
+        item2: {
+          title: "Especialización Sydney",
+          text: "Te preparamos para el salto internacional, cubriendo desde el nivel de inglés académico hasta las pruebas de entrada australianas.",
+        },
+        item3: {
+          title: "Precisión en Selectividad",
+          text: "Entrenamos tu capacidad de respuesta bajo presión para que no dejes ni una décima al azar.",
+        },
       },
       metodologia: {
         titulo: "Metodología de Alto Rendimiento",
@@ -209,10 +220,21 @@ Con una <span class="text-blue-600 font-semibold">media de 9,25 en bachillerato<
     },
     pricing: {
       titulo: "Com et puc ajudar?",
-      contenidoGratuito: {
-        titulo: "Contingut gratuït",
-        texto: "Descobreix les meves <a href='/links' class='text-[#3B82F6] font-semibold underline hover:text-blue-700'>xarxes socials</a> amb contingut <span class='text-[#3B82F6] font-semibold'>gratuït</span> per millorar les teves habilitats i rendiment acadèmic.",
-        boton: "Les meves xarxes socials",
+      roadmap: {
+        title: "La teva Full de Ruta cap a la Universitat",
+        description: "El camí cap al grau dels teus somnis (ja sigui a Espanya o a Austràlia) requereix més que colzes; requereix estratègia. Substituïm el soroll de les xarxes per <span class='text-[#3B82F6] font-semibold'>coneixement exhaustiu</span> aplicat als exàmens més exigents del món:",
+        item1: {
+          title: "Domini del Batxillerat Internacional",
+          text: "Analitzem les rúbriques d'avaluació interna i externa perquè sàpigues exactament què espera l'examinador.",
+        },
+        item2: {
+          title: "Especialització Sydney",
+          text: "Et preparem per al salt internacional, cobrint des del nivell d'anglès acadèmic fins a les proves d'entrada australianes.",
+        },
+        item3: {
+          title: "Precisió en Selectivitat",
+          text: "Entrenem la teva capacitat de resposta sota pressió perquè no deixis ni una dècima a l'atzar.",
+        },
       },
       metodologia: {
         titulo: "Metodologia d'Alta Rendiment",
@@ -403,10 +425,21 @@ Amb una <span class="text-blue-600 font-semibold">mitjana de 9,25 en batxillerat
     },
     pricing: {
       titulo: "How can I help you?",
-      contenidoGratuito: {
-        titulo: "Free content",
-        texto: "Discover my <a href='/links' class='text-[#3B82F6] font-semibold underline hover:text-blue-700'>social media</a> with <span class='text-[#3B82F6] font-semibold'>free</span> content to improve your skills and academic performance.",
-        boton: "My social media",
+      roadmap: {
+        title: "Your Roadmap to University",
+        description: "The path to your dream degree (whether in Spain or Australia) requires more than hard work; it requires strategy. We replace the noise of social media with <span class='text-[#3B82F6] font-semibold'>exhaustive knowledge</span> applied to the most demanding exams in the world:",
+        item1: {
+          title: "International Baccalaureate Mastery",
+          text: "We analyze internal and external assessment rubrics so you know exactly what the examiner expects.",
+        },
+        item2: {
+          title: "Sydney Specialization",
+          text: "We prepare you for the international leap, covering everything from academic English levels to Australian entrance tests.",
+        },
+        item3: {
+          title: "Selectividad Precision",
+          text: "We train your ability to respond under pressure so you don't leave a single tenth to chance.",
+        },
       },
       metodologia: {
         titulo: "High Performance Methodology",

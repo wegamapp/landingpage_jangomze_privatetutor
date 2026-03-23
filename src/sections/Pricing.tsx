@@ -14,12 +14,32 @@ import {
 } from "chart.js";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-import freeContentImg from "@/assets/youtube3dicon.png";
 import methodologyImg from "@/assets/gorro_graduacion.png";
 import resultsImg from "@/assets/trophy-front-color.png";
 import softwareImg from "@/assets/cog.png";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+const RoadmapIcon = () => (
+  <svg
+    viewBox="0 0 128 128"
+    aria-hidden="true"
+    className="w-full h-full"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient id="roadmap-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0F4C81" />
+        <stop offset="100%" stopColor="#3B82F6" />
+      </linearGradient>
+    </defs>
+    <circle cx="64" cy="64" r="58" fill="url(#roadmap-gradient)" />
+    <circle cx="64" cy="64" r="38" fill="#FFFFFF" opacity="0.95" />
+    <path d="M64 30L72 56L98 64L72 72L64 98L56 72L30 64L56 56Z" fill="#0F4C81" />
+    <circle cx="64" cy="64" r="8" fill="#3B82F6" />
+    <path d="M87 41L76 52" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" />
+  </svg>
+);
 
 export const Pricing = () => {
   const { t } = useLanguage();
@@ -78,9 +98,22 @@ export const Pricing = () => {
 
   const helpBoxes = [
     {
-      image: freeContentImg,
-      title: t("pricing.contenidoGratuito.titulo"),
-      text: t("pricing.contenidoGratuito.texto"),
+      title: t("pricing.roadmap.title"),
+      description: t("pricing.roadmap.description"),
+      roadmapItems: [
+        {
+          title: t("pricing.roadmap.item1.title"),
+          text: t("pricing.roadmap.item1.text"),
+        },
+        {
+          title: t("pricing.roadmap.item2.title"),
+          text: t("pricing.roadmap.item2.text"),
+        },
+        {
+          title: t("pricing.roadmap.item3.title"),
+          text: t("pricing.roadmap.item3.text"),
+        },
+      ],
       button: null,
     },
     {
@@ -116,9 +149,10 @@ export const Pricing = () => {
         </h2>
 
         <div className="flex flex-col gap-12 md:gap-16">
-          {helpBoxes.map(({ image, imageSrc, imageAlt, title, text, button, isScoreBox }, index) => {
+          {helpBoxes.map(({ image, imageSrc, imageAlt, title, text, description, roadmapItems, button, isScoreBox }, index) => {
             const isReversed = index % 2 === 1;
             const imgAlt = imageAlt ?? title;
+            const isRoadmapBox = index === 0;
 
             return (
               <div
@@ -132,7 +166,9 @@ export const Pricing = () => {
                     index === 0 ? "w-32 h-32 md:mr-12" : "w-48 h-48 md:mx-8"
                   }`}
                 >
-                  {imageSrc ? (
+                  {isRoadmapBox ? (
+                    <RoadmapIcon />
+                  ) : imageSrc ? (
                     <Image src={imageSrc} alt={imgAlt} fill className="object-contain rounded-xl" />
                   ) : (
                     <Image src={image} alt={title} className="w-full h-full object-contain rounded-xl" />
@@ -141,10 +177,36 @@ export const Pricing = () => {
 
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-xl md:text-2xl font-bold mb-3 text-[#001738]">{title}</h3>
-                  <p
-                    className="text-gray-700 text-base md:text-lg leading-relaxed mb-6"
-                    dangerouslySetInnerHTML={{ __html: text }}
-                  />
+                  {isRoadmapBox ? (
+                    <>
+                      <p
+                        className="text-gray-700 text-base md:text-lg leading-relaxed mb-6"
+                        dangerouslySetInnerHTML={{ __html: description }}
+                      />
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-left">
+                        {roadmapItems?.map((item, itemIndex) => (
+                          <div
+                            key={itemIndex}
+                            className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm"
+                          >
+                            <h4
+                              className="text-base md:text-lg font-semibold text-[#001738] mb-2"
+                              dangerouslySetInnerHTML={{ __html: item.title }}
+                            />
+                            <p
+                              className="text-sm md:text-base text-gray-700 leading-relaxed"
+                              dangerouslySetInnerHTML={{ __html: item.text }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <p
+                      className="text-gray-700 text-base md:text-lg leading-relaxed mb-6"
+                      dangerouslySetInnerHTML={{ __html: text }}
+                    />
+                  )}
 
                   {isScoreBox && (
                     <div className="flex flex-col md:flex-row md:items-center md:gap-6">
