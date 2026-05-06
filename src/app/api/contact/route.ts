@@ -1,12 +1,19 @@
 import { MailtrapClient } from "mailtrap";
 import { getTranslations, resolveLocale, t } from "./i18n-server";
 
-const OWNER_EMAIL = process.env.EMAIL_TEACHER;
-const MAILTRAP_TOKEN = process.env.MAILTRAP_TOKEN ?? process.env.MAILTRAP_API_KEY;
+function readEnv(name: string): string | undefined {
+  const v = process.env[name];
+  if (!v) return undefined;
+  const trimmed = v.trim();
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+const OWNER_EMAIL = readEnv("EMAIL_TEACHER");
+const MAILTRAP_TOKEN = readEnv("MAILTRAP_TOKEN") ?? readEnv("MAILTRAP_API_KEY");
 const FROM_NAME = "Jan Gómez Escobar";
-const FROM_EMAIL = process.env.EMAIL_USER ?? "hello@jangomezetutor.es";
+const FROM_EMAIL = readEnv("EMAIL_USER") ?? OWNER_EMAIL ?? "hello@jangomezetutor.es";
 const OWNER_PHONE = "+34652092407";
-const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? OWNER_PHONE).replace(/^\+/, "");
+const WHATSAPP_NUMBER = (readEnv("NEXT_PUBLIC_WHATSAPP_NUMBER") ?? OWNER_PHONE).replace(/^\+/, "");
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 /** Parse selected slot from request: prefer explicit horario, else extract from mensaje */
@@ -265,10 +272,41 @@ ${mensaje || "—"}`,
 
     return Response.json({ ok: true });
   } catch (err) {
+    const asAny = err as {
+      message?: string;
+      cause?: {
+        response?: {
+          status?: number;
+          data?: unknown;
+        };
+      };
+    };
+    const status = asAny?.cause?.response?.status;
+    const providerData = asAny?.cause?.response?.data;
     const message = err instanceof Error ? err.message : String(err);
+    const providerMessage =
+      typeof providerData === "string"
+        ? providerData
+        : providerData
+        ? JSON.stringify(providerData)
+        : undefined;
+
     console.error("Mailtrap API error:", err);
+
+    if (status === 401) {
+      return Response.json(
+        {
+          ok: false,
+          error:
+            "Mailtrap unauthorized. Verifica MAILTRAP_TOKEN (Transactional/API), redeploy y que EMAIL_USER use un remitente permitido por el dominio.",
+          details: providerMessage ?? message,
+        },
+        { status: 500 }
+      );
+    }
+
     return Response.json(
-      { ok: false, error: "Failed to send email", details: message },
+      { ok: false, error: "Failed to send email", details: providerMessage ?? message },
       { status: 500 }
     );
   }

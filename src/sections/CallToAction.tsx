@@ -81,7 +81,9 @@ export const CallToAction = () => {
 
       if (!emailRes.ok) {
         const data = await emailRes.json().catch(() => ({}));
-        const errorText = typeof data?.error === "string" ? data.error : t("callToAction.errorEnviar");
+        const apiError = typeof data?.error === "string" ? data.error : t("callToAction.errorEnviar");
+        const apiDetails = typeof data?.details === "string" ? data.details : "";
+        const errorText = apiDetails ? `${apiError} (${apiDetails})` : apiError;
         setMessage({ type: 'error', text: errorText });
         console.error("Error en la respuesta del API:", emailRes.status, data);
         return;
