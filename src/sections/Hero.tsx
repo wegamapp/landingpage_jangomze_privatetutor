@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { RotatingTextCircle } from "@/components/RotatingTextCircle";
 import { useLanguage } from "@/contexts/LanguageContext";
+import TrackedCTAButton from "@/components/TrackedCTAButton";
 
 export const Hero = () => {
   const { t } = useLanguage();
@@ -44,14 +45,12 @@ export const Hero = () => {
             </div>
 
             <div className="flex gap-1 items-center mt-[30px]">
-              <motion.a
+              <TrackedCTAButton
                 href="#contacta"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 className="btn btn-primary transition-all duration-300"
               >
                 {t("hero.descubreAyuda")}
-              </motion.a>
+              </TrackedCTAButton>
               <motion.a
                 href="#pricing"
                 whileHover={{ scale: 1.05 }}

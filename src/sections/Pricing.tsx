@@ -17,6 +17,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import methodologyImg from "@/assets/gorro_graduacion.png";
 import resultsImg from "@/assets/trophy-front-color.png";
 import softwareImg from "@/assets/cog.png";
+import TrackedCTAButton from "@/components/TrackedCTAButton";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -242,12 +243,12 @@ export const Pricing = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <a
+          <TrackedCTAButton
             href="#contacta"
             className="inline-flex items-center justify-center rounded-lg border-2 border-[#001738] bg-transparent px-6 py-3 text-base font-semibold text-[#001738] transition-all duration-300 hover:bg-[#001738] hover:text-white"
           >
             {t("pricing.ctaReserva")}
-          </a>
+          </TrackedCTAButton>
         </div>
       </div>
     </section>

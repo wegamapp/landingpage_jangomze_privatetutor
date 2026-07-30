@@ -7,6 +7,7 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import TrackedCTAButton from "@/components/TrackedCTAButton";
 
 export const Header = () => {
   const { t } = useLanguage();
@@ -112,10 +113,8 @@ export const Header = () => {
                   </Link>
                 </motion.div>
 
-                <motion.a
+                <TrackedCTAButton
                   href="#contacta"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                   className="bg-[#001738] text-white px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center gap-1 transition-all duration-300 hover:bg-[#002d6d] shadow-md hover:shadow-lg"
                 >
                   <span>{t("header.descubreAyuda")}</span>
@@ -126,7 +125,7 @@ export const Header = () => {
                     height={16}
                     className="h-4 w-4 inline-flex" 
                   />
-                </motion.a>
+                </TrackedCTAButton>
               </>
             )}
           </nav>
@@ -194,10 +193,14 @@ export const Header = () => {
                     <Link href="/timeline" onClick={closeMobileMenu} className="py-3 px-4 text-black/80 hover:text-black font-medium rounded-lg hover:bg-gray-100">
                       {t("header.metodologia")}
                     </Link>
-                    <a href="#contacta" onClick={closeMobileMenu} className="mt-2 py-3 px-4 bg-[#001738] text-white rounded-lg font-medium text-center inline-flex items-center justify-center gap-1 hover:bg-[#002d6d]">
+                    <TrackedCTAButton
+                      href="#contacta"
+                      onBeforeRedirect={closeMobileMenu}
+                      className="mt-2 py-3 px-4 bg-[#001738] text-white rounded-lg font-medium text-center inline-flex items-center justify-center gap-1 hover:bg-[#002d6d]"
+                    >
                       <span>{t("header.descubreAyuda")}</span>
                       <Image src="/images/arrow-right.svg" alt="" width={16} height={16} className="h-4 w-4" />
-                    </a>
+                    </TrackedCTAButton>
                   </>
                 )}
               </nav>
