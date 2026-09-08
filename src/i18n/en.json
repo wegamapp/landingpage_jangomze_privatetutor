@@ -6,13 +6,70 @@
     },
     "contact_whatsapp": "Contact on WhatsApp",
     "location_title": "Location",
-    "location_val": "Biblioteca Jaume Fuster Lesseps",
+    "location_val": "Macquarie University Library / Online / Flexible Sydney Locations",
     "location_negotiable": "(location can be negotiated)",
     "bring_title": "What to bring",
     "bring_val": "Notes for the subject to review, textbook for the subject in question, laptop or device if using classroom or similar, pencil case with all necessary items, chargers, sample solved exercises or past exams.",
     "policy_title": "Cancellation",
     "policy_val": "24h notice required.",
     "whatsapp_note": "You can also contact us on WhatsApp for quick questions."
+  },
+  "landingA": {
+    "hero": {
+      "eyebrow": "JAN GÓMEZ ESCOBAR | MACQUARIE UNIVERSITY",
+      "headline": "Master Effective Study Habits and Secure Your Dream University Degree."
+    },
+    "productShowcase": {
+      "tag": "Boost Your ATAR & Academic Efficiency",
+      "headline": "Learn How to Learn: The Skill That Transforms Your HSC Results."
+    },
+    "pricing": {
+      "roadmap": {
+        "title": "Your Roadmap to Australian Universities",
+        "item1": {
+          "title": "HSC & NESA Specialisation",
+          "desc": "Deep dive into NESA rubrics and exam strategies to maximize every mark."
+        },
+        "item2": {
+          "title": "Sydney Academic Prep",
+          "desc": "Tailored 1-on-1 coaching for Year 11 & 12 students aiming for top ATAR cut-offs."
+        }
+      }
+    },
+    "cta": {
+      "location": "Macquarie University Library / Online / Flexible Sydney Locations"
+    }
+  },
+  "landingB": {
+    "hero": {
+      "eyebrow": "QUANTITATIVE LEARNING ANALYTICS | MACQUARIE UNIVERSITY",
+      "headline": "Stop Guessing How to Study. We Measure, Test, and Optimize Your HSC Prep with Real Data.",
+      "subtitle": "No two HSC students learn the same way. What works for your classmate might waste hours of your time."
+    },
+    "productShowcase": {
+      "headline": "No two HSC students learn the same way. What works for your classmate might waste hours of your time.",
+      "card1": {
+        "title": "N=1 Diagnostic",
+        "desc": "We test your brain across 4 study frameworks using real HSC past papers to find your exact learning style."
+      },
+      "card2": {
+        "title": "Retention Decay Tracking",
+        "desc": "We measure 7-day memory decay to eliminate low-yield habits and double down on high-return methods."
+      },
+      "card4": {
+        "title": "Vector of Efficiency",
+        "desc": "Track hours spent vs. mark increment to maximize your ATAR return per study hour."
+      }
+    },
+    "pricing": {
+      "methodology": {
+        "title": "N=1 Personal Learning Diagnostic",
+        "desc": "We don't just teach the subject; we test, track, and optimize HOW you learn using quantitative study data."
+      }
+    },
+    "cta": {
+      "primaryButton": "Book Your Child's Cognitive Study Diagnostic"
+    }
   },
   "emails": {
     "confirmation": {

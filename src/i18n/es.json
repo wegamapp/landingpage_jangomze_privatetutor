@@ -6,13 +6,57 @@
     },
     "contact_whatsapp": "Contactar por WhatsApp",
     "location_title": "Ubicación",
-    "location_val": "Biblioteca Jaume Fuster Lesseps",
+    "location_val": "Biblioteca de Macquarie University / Online / Ubicación a convenir en Sídney",
     "location_negotiable": "(se puede negociar la ubicación)",
     "bring_title": "Qué traer",
     "bring_val": "Apuntes asignatura a repasar, libro asignatura en cuestión, ordenador o dispositivo en caso de usar classroom o parecidos, estuche con todos los elementos necesarios, cargadores, ejemplo ejercicios resueltos o exámenes pasados.",
     "policy_title": "Cancelación",
     "policy_val": "Aviso de 24h.",
     "whatsapp_note": "También puedes contactarnos por WhatsApp para dudas rápidas."
+  },
+  "landingA": {
+    "hero": {
+      "eyebrow": "JAN GÓMEZ ESCOBAR | MACQUARIE UNIVERSITY",
+      "headline": "Aprende a estudiar de forma efectiva y alcanza la carrera de tus sueños en Australia."
+    },
+    "pricing": {
+      "roadmap": {
+        "title": "Tu Hoja de Ruta hacia la Universidad en Australia",
+        "item1": {
+          "title": "Especialización en HSC y Currículo NESA"
+        }
+      }
+    },
+    "cta": {
+      "location": "Biblioteca de Macquarie University / Online / Ubicación a convenir en Sídney"
+    }
+  },
+  "landingB": {
+    "hero": {
+      "eyebrow": "ANÁLISIS CUANTITATIVO DE APRENDIZAJE | MACQUARIE UNIVERSITY",
+      "headline": "Deja de adivinar cómo estudiar. Medimos, probamos y optimizamos tu preparación para el HSC con datos reales.",
+      "subtitle": "No hay dos estudiantes de HSC iguales. Lo que le funciona a tu compañero puede hacerte perder decenas de horas."
+    },
+    "productShowcase": {
+      "headline": "No hay dos estudiantes de HSC iguales. Lo que le funciona a tu compañero puede hacerte perder decenas de horas.",
+      "card1": {
+        "title": "Diagnóstico N=1",
+        "desc": "Evaluamos tu cerebro en 4 metodologías con exámenes reales del HSC para hallar tu fórmula exacta."
+      },
+      "card2": {
+        "title": "Control de Curva de Olvido",
+        "desc": "Medimos la retención a 7 días para eliminar hábitos ineficientes y potenciar lo que realmente funciona."
+      }
+    },
+    "pricing": {
+      "methodology": {
+        "title": "Diagnóstico Cognitivo Personalizado N=1",
+        "desc": "No solo enseñamos la asignatura; probamos, medimos y optimizamos CÓMO aprendes mediante analítica de datos."
+      }
+    },
+    "cta": {
+      "primaryButton": "Reserva tu Diagnóstico Cognitivo Gratuito"
+    }
   },
   "emails": {
     "confirmation": {

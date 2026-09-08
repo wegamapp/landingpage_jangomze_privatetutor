@@ -8,7 +8,7 @@ import { ProductShowcase } from "@/sections/ProductShowcase";
 import { Testimonials } from "@/sections/Testimonials";
 import SobreMi from "@/sections/AboutMe";
 
-export default function LandingB() {
+export default function TutoringPage() {
   return (
     <div>
       {/* Inicio */}
@@ -38,4 +38,3 @@ export default function LandingB() {
     </div>
   );
 }
-

@@ -2,7 +2,8 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import Statsig from "statsig-node";
 
-// Root-level middleware for the `sydney_landing_validation` landing page experiment.
+// Tutoring landing experiment (`sydney_landing_validation`).
+// Applies only to `/services/tutoring` — the site root `/` is never rewritten.
 //
 // Env vars to set:
 // - .env.local:
@@ -11,7 +12,7 @@ import Statsig from "statsig-node";
 //   - Add `STATSIG_SERVER_SECRET` as an environment variable (same name/value).
 //
 // Notes:
-// - If Statsig fails or times out, we silently default to `/landing-a` (control).
+// - If Statsig fails or times out, we silently default to `/services/tutoring/variant-a` (control).
 // - We store:
 //   - `statsigStableID` (30-day cookie retention)
 //   - `sydney_landing_validation_variant` (landing_a | landing_b, 30-day retention)
@@ -20,6 +21,10 @@ const STABLE_ID_COOKIE = "statsigStableID";
 const VARIANT_COOKIE = "sydney_landing_validation_variant";
 const EXPERIMENT_NAME = "sydney_landing_validation";
 const PARAM_VARIANT_NAME = "variant_name";
+
+const TUTORING_PATH = "/services/tutoring";
+const VARIANT_A_PATH = "/services/tutoring/variant-a";
+const VARIANT_B_PATH = "/services/tutoring/variant-b";
 
 const THIRTY_DAYS_SECONDS = 60 * 60 * 24 * 30;
 const DEFAULT_VARIANT: "landing_a" | "landing_b" = "landing_a";
@@ -102,8 +107,12 @@ function cookieOptions(req: NextRequest) {
 }
 
 export const config = {
-  // Only run for the experiment entry points.
-  matcher: ["/", "/landing-a", "/landing-b"],
+  // String literals required so Next.js can statically analyze the matcher.
+  matcher: [
+    "/services/tutoring",
+    "/services/tutoring/variant-a",
+    "/services/tutoring/variant-b",
+  ],
   // Allows `statsig-node` usage in middleware.
   runtime: "nodejs",
 };
@@ -119,9 +128,9 @@ export default async function middleware(req: NextRequest) {
 
   // If request is already for the variant routes, keep the URL stable
   // and just ensure cookies exist for client-side tracking.
-  if (pathname === "/landing-a" || pathname === "/landing-b") {
+  if (pathname === VARIANT_A_PATH || pathname === VARIANT_B_PATH) {
     const existingVariant = getCookieValue(req, VARIANT_COOKIE);
-    const variant = existingVariant ?? (pathname === "/landing-b" ? "landing_b" : "landing_a");
+    const variant = existingVariant ?? (pathname === VARIANT_B_PATH ? "landing_b" : "landing_a");
 
     const res = NextResponse.next();
     if (!existingStableID) res.cookies.set(STABLE_ID_COOKIE, stableID, cookieOptions(req));
@@ -137,7 +146,7 @@ export default async function middleware(req: NextRequest) {
       : "landing_a"
     : await evaluateVariant(stableID).catch(() => DEFAULT_VARIANT);
 
-  const rewritePath = variant === "landing_b" ? "/landing-b" : "/landing-a";
+  const rewritePath = variant === "landing_b" ? VARIANT_B_PATH : VARIANT_A_PATH;
   const url = req.nextUrl.clone();
   url.pathname = rewritePath;
 
@@ -146,4 +155,3 @@ export default async function middleware(req: NextRequest) {
   res.cookies.set(VARIANT_COOKIE, variant, cookieOptions(req));
   return res;
 }
-

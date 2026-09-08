@@ -6,13 +6,50 @@
     },
     "contact_whatsapp": "Contactar per WhatsApp",
     "location_title": "Ubicació",
-    "location_val": "Biblioteca Jaume Fuster Lesseps",
+    "location_val": "Biblioteca de Macquarie University / Online / Ubicació a convenir a Sídney",
     "location_negotiable": "(es pot negociar la ubicació)",
     "bring_title": "Què portar",
     "bring_val": "Apunts assignatura a repassar, llibre assignatura en qüestió, ordinador o dispositiu en cas d'usar classroom o similars, estoig amb tots els elements necessaris, carregadors, exemples d'exercicis resolts o exàmens passats.",
     "policy_title": "Cancel·lació",
     "policy_val": "Avís de 24h.",
     "whatsapp_note": "També pots contactar-nos per WhatsApp per a dubtes ràpids."
+  },
+  "landingA": {
+    "hero": {
+      "eyebrow": "JAN GÓMEZ ESCOBAR | MACQUARIE UNIVERSITY",
+      "headline": "Aprèn a estudiar de forma efectiva i aconsegueix la carrera dels teus somnis a Austràlia."
+    },
+    "pricing": {
+      "roadmap": {
+        "title": "La teva Fulla de Ruta cap a la Universitat a Austràlia"
+      }
+    },
+    "cta": {
+      "location": "Biblioteca de Macquarie University / Online / Ubicació a convenir a Sídney"
+    }
+  },
+  "landingB": {
+    "hero": {
+      "eyebrow": "ANÀLISI CUANTITATIVA D'APRENENTATGE | MACQUARIE UNIVERSITY",
+      "headline": "Deixa d'endevinar com estudiar. Mesurem, provem i optimitzem la teva preparació per al HSC amb dades reals.",
+      "subtitle": "No hi ha dos estudiants de HSC iguals. El que li funciona al teu company et pot fer perdre desenes d'hores."
+    },
+    "productShowcase": {
+      "headline": "No hi ha dos estudiants de HSC iguals. El que li funciona al teu company et pot fer perdre desenes d'hores.",
+      "card1": {
+        "title": "Diagnòstic N=1",
+        "desc": "Avaluem el teu cervell en 4 metodologies amb exàmens reals del HSC per trobar la teva fórmula exacta."
+      }
+    },
+    "pricing": {
+      "methodology": {
+        "title": "Diagnòstic Cognitiu Personalitzat N=1",
+        "desc": "No només ensenyem l'assignatura; mesurem i optimitzem COM aprens mitjançant analítica de dades."
+      }
+    },
+    "cta": {
+      "primaryButton": "Reserva el teu Diagnòstic Cognitiu Gratuït"
+    }
   },
   "emails": {
     "confirmation": {

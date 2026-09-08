@@ -145,13 +145,57 @@ Con una <span class="text-blue-600 font-semibold">media de 9,25 en bachillerato<
       },
       contact_whatsapp: "Contactar por WhatsApp",
       location_title: "Ubicación",
-      location_val: "Biblioteca Jaume Fuster Lesseps",
+      location_val: "Biblioteca de Macquarie University / Online / Ubicación a convenir en Sídney",
       location_negotiable: "(se puede negociar la ubicación)",
       bring_title: "Qué traer",
       bring_val: "Apuntes asignatura a repasar, libro asignatura en cuestión, ordenador o dispositivo en caso de usar classroom o parecidos, estuche con todos los elementos necesarios, cargadores, ejemplo ejercicios resueltos o exámenes pasados.",
       policy_title: "Cancelación",
       policy_val: "Aviso de 24h.",
       whatsapp_note: "También puedes contactarnos por WhatsApp para dudas rápidas.",
+    },
+    landingA: {
+      hero: {
+        eyebrow: "JAN GÓMEZ ESCOBAR | MACQUARIE UNIVERSITY",
+        headline: "Aprende a estudiar de forma efectiva y alcanza la carrera de tus sueños en Australia.",
+      },
+      pricing: {
+        roadmap: {
+          title: "Tu Hoja de Ruta hacia la Universidad en Australia",
+          item1: {
+            title: "Especialización en HSC y Currículo NESA",
+          },
+        },
+      },
+      cta: {
+        location: "Biblioteca de Macquarie University / Online / Ubicación a convenir en Sídney",
+      },
+    },
+    landingB: {
+      hero: {
+        eyebrow: "ANÁLISIS CUANTITATIVO DE APRENDIZAJE | MACQUARIE UNIVERSITY",
+        headline: "Deja de adivinar cómo estudiar. Medimos, probamos y optimizamos tu preparación para el HSC con datos reales.",
+        subtitle: "No hay dos estudiantes de HSC iguales. Lo que le funciona a tu compañero puede hacerte perder decenas de horas.",
+      },
+      productShowcase: {
+        headline: "No hay dos estudiantes de HSC iguales. Lo que le funciona a tu compañero puede hacerte perder decenas de horas.",
+        card1: {
+          title: "Diagnóstico N=1",
+          desc: "Evaluamos tu cerebro en 4 metodologías con exámenes reales del HSC para hallar tu fórmula exacta.",
+        },
+        card2: {
+          title: "Control de Curva de Olvido",
+          desc: "Medimos la retención a 7 días para eliminar hábitos ineficientes y potenciar lo que realmente funciona.",
+        },
+      },
+      pricing: {
+        methodology: {
+          title: "Diagnóstico Cognitivo Personalizado N=1",
+          desc: "No solo enseñamos la asignatura; probamos, medimos y optimizamos CÓMO aprendes mediante analítica de datos.",
+        },
+      },
+      cta: {
+        primaryButton: "Reserva tu Diagnóstico Cognitivo Gratuito",
+      },
     },
     footer: {
       derechos: "© 2025 jangomeze, Inc. All rights reserved.",
@@ -350,13 +394,50 @@ Amb una <span class="text-blue-600 font-semibold">mitjana de 9,25 en batxillerat
       },
       contact_whatsapp: "Contactar per WhatsApp",
       location_title: "Ubicació",
-      location_val: "Biblioteca Jaume Fuster Lesseps",
+      location_val: "Biblioteca de Macquarie University / Online / Ubicació a convenir a Sídney",
       location_negotiable: "(es pot negociar la ubicació)",
       bring_title: "Què portar",
       bring_val: "Apunts assignatura a repassar, llibre assignatura en qüestió, ordinador o dispositiu en cas d'usar classroom o similars, estoig amb tots els elements necessaris, carregadors, exemples d'exercicis resolts o exàmens passats.",
       policy_title: "Cancel·lació",
       policy_val: "Avís de 24h.",
       whatsapp_note: "També pots contactar-nos per WhatsApp per a dubtes ràpids.",
+    },
+    landingA: {
+      hero: {
+        eyebrow: "JAN GÓMEZ ESCOBAR | MACQUARIE UNIVERSITY",
+        headline: "Aprèn a estudiar de forma efectiva i aconsegueix la carrera dels teus somnis a Austràlia.",
+      },
+      pricing: {
+        roadmap: {
+          title: "La teva Fulla de Ruta cap a la Universitat a Austràlia",
+        },
+      },
+      cta: {
+        location: "Biblioteca de Macquarie University / Online / Ubicació a convenir a Sídney",
+      },
+    },
+    landingB: {
+      hero: {
+        eyebrow: "ANÀLISI CUANTITATIVA D'APRENENTATGE | MACQUARIE UNIVERSITY",
+        headline: "Deixa d'endevinar com estudiar. Mesurem, provem i optimitzem la teva preparació per al HSC amb dades reals.",
+        subtitle: "No hi ha dos estudiants de HSC iguals. El que li funciona al teu company et pot fer perdre desenes d'hores.",
+      },
+      productShowcase: {
+        headline: "No hi ha dos estudiants de HSC iguals. El que li funciona al teu company et pot fer perdre desenes d'hores.",
+        card1: {
+          title: "Diagnòstic N=1",
+          desc: "Avaluem el teu cervell en 4 metodologies amb exàmens reals del HSC per trobar la teva fórmula exacta.",
+        },
+      },
+      pricing: {
+        methodology: {
+          title: "Diagnòstic Cognitiu Personalitzat N=1",
+          desc: "No només ensenyem l'assignatura; mesurem i optimitzem COM aprens mitjançant analítica de dades.",
+        },
+      },
+      cta: {
+        primaryButton: "Reserva el teu Diagnòstic Cognitiu Gratuït",
+      },
     },
     footer: {
       derechos: "© 2025 jangomeze, Inc. Tots els drets reservats.",
@@ -555,13 +636,70 @@ With an <span class="text-blue-600 font-semibold">average of 9.25 in high school
       },
       contact_whatsapp: "Contact on WhatsApp",
       location_title: "Location",
-      location_val: "Biblioteca Jaume Fuster Lesseps",
+      location_val: "Macquarie University Library / Online / Flexible Sydney Locations",
       location_negotiable: "(location can be negotiated)",
       bring_title: "What to bring",
       bring_val: "Notes for the subject to review, textbook for the subject in question, laptop or device if using classroom or similar, pencil case with all necessary items, chargers, sample solved exercises or past exams.",
       policy_title: "Cancellation",
       policy_val: "24h notice required.",
       whatsapp_note: "You can also contact us on WhatsApp for quick questions.",
+    },
+    landingA: {
+      hero: {
+        eyebrow: "JAN GÓMEZ ESCOBAR | MACQUARIE UNIVERSITY",
+        headline: "Master Effective Study Habits and Secure Your Dream University Degree.",
+      },
+      productShowcase: {
+        tag: "Boost Your ATAR & Academic Efficiency",
+        headline: "Learn How to Learn: The Skill That Transforms Your HSC Results.",
+      },
+      pricing: {
+        roadmap: {
+          title: "Your Roadmap to Australian Universities",
+          item1: {
+            title: "HSC & NESA Specialisation",
+            desc: "Deep dive into NESA rubrics and exam strategies to maximize every mark.",
+          },
+          item2: {
+            title: "Sydney Academic Prep",
+            desc: "Tailored 1-on-1 coaching for Year 11 & 12 students aiming for top ATAR cut-offs.",
+          },
+        },
+      },
+      cta: {
+        location: "Macquarie University Library / Online / Flexible Sydney Locations",
+      },
+    },
+    landingB: {
+      hero: {
+        eyebrow: "QUANTITATIVE LEARNING ANALYTICS | MACQUARIE UNIVERSITY",
+        headline: "Stop Guessing How to Study. We Measure, Test, and Optimize Your HSC Prep with Real Data.",
+        subtitle: "No two HSC students learn the same way. What works for your classmate might waste hours of your time.",
+      },
+      productShowcase: {
+        headline: "No two HSC students learn the same way. What works for your classmate might waste hours of your time.",
+        card1: {
+          title: "N=1 Diagnostic",
+          desc: "We test your brain across 4 study frameworks using real HSC past papers to find your exact learning style.",
+        },
+        card2: {
+          title: "Retention Decay Tracking",
+          desc: "We measure 7-day memory decay to eliminate low-yield habits and double down on high-return methods.",
+        },
+        card4: {
+          title: "Vector of Efficiency",
+          desc: "Track hours spent vs. mark increment to maximize your ATAR return per study hour.",
+        },
+      },
+      pricing: {
+        methodology: {
+          title: "N=1 Personal Learning Diagnostic",
+          desc: "We don't just teach the subject; we test, track, and optimize HOW you learn using quantitative study data.",
+        },
+      },
+      cta: {
+        primaryButton: "Book Your Child's Cognitive Study Diagnostic",
+      },
     },
     footer: {
       derechos: "© 2025 jangomeze, Inc. All rights reserved.",
