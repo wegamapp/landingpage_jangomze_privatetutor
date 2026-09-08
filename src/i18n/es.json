@@ -72,6 +72,12 @@
       "footer": "Nos vemos pronto.",
       "whatsapp_button": "Contactar por WhatsApp"
     },
+    "inquiry": {
+      "subject": "Mensaje recibido, {nombre}",
+      "greeting": "Hola {nombre},",
+      "thanks": "Gracias por escribir. He recibido tu mensaje y te responderé lo antes posible.",
+      "footer": "Jan Gómez Escobar"
+    },
     "reminder": {
       "subject": "Recordatorio: tu clase es mañana — TutorTrack",
       "greeting": "Hola {nombre},",

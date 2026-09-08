@@ -1,12 +1,16 @@
 "use client";
-import fotolateral from "@/assets/mirando_al_lateral.png";
+import fotoprofesional from "@/assets/ProfesionaPicture.jpg";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { RotatingTextCircle } from "@/components/RotatingTextCircle";
+import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import TrackedCTAButton from "@/components/TrackedCTAButton";
 
-export const Hero = () => {
+type HeroProps = {
+  variant?: "tutoring" | "portfolio";
+};
+
+export const Hero = ({ variant = "tutoring" }: HeroProps) => {
   const { t } = useLanguage();
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -15,6 +19,7 @@ export const Hero = () => {
   });
 
   const translateY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const isPortfolio = variant === "portfolio";
 
   return (
     <section
@@ -27,75 +32,108 @@ export const Hero = () => {
     >
       <div className="container">
         <div className="md:flex items-center justify-between">
-          
-          {/* ----------- TEXTO ----------- */}
           <div className="md:w-[478px]">
-            <h2 className="text-lg md:text-xl font-bold text-black mt-2 tracking-wide">
-              {t("hero.soy")}
-            </h2>
-
-            <div className="lg:w-2/3 md:w-full">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">
-                {t("hero.titulo")}
-                <span className="inline bg-blue-200 text-black px-0.5 py-0.5">
-                  {" "}
-                  {t("hero.tusSueños")}
-                </span>
-              </h2>
-            </div>
-
-            <div className="flex gap-1 items-center mt-[30px]">
-              <TrackedCTAButton
-                href="#contacta"
-                className="btn btn-primary transition-all duration-300"
-              >
-                {t("hero.descubreAyuda")}
-              </TrackedCTAButton>
-              <motion.a
-                href="#pricing"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn btn-text flex gap-1 transition-all duration-300"
-              >
-                <span>{t("hero.learnMore")}</span>
-              </motion.a>
-            </div>
+            {isPortfolio ? (
+              <>
+                <p className="text-sm md:text-base font-semibold text-[#001738]/80 mt-2 tracking-wide uppercase">
+                  {t("hero.portfolio.eyebrow")}
+                </p>
+                <h1 className="text-3xl md:text-4xl font-extrabold mb-4 mt-3 leading-tight">
+                  {t("hero.portfolio.headline")}{" "}
+                  <span className="inline bg-blue-200 text-black px-0.5 py-0.5">
+                    {t("hero.portfolio.highlight")}
+                  </span>
+                </h1>
+                <p className="text-gray-800 text-base md:text-lg leading-relaxed">
+                  {t("hero.portfolio.bio")}
+                </p>
+                <div className="flex flex-wrap gap-3 items-center mt-[30px]">
+                  <motion.a
+                    href="#portfolio"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="btn btn-primary transition-all duration-300"
+                  >
+                    {t("hero.portfolio.viewWork")}
+                  </motion.a>
+                  <motion.a
+                    href="#contact"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="btn btn-text flex gap-1 transition-all duration-300"
+                  >
+                    {t("hero.portfolio.getInTouch")}
+                  </motion.a>
+                </div>
+                <Link
+                  href="/services/tutoring"
+                  className="inline-block mt-5 text-sm font-semibold text-[#001738] underline underline-offset-4 hover:text-[#002d6d]"
+                >
+                  {t("hero.portfolio.tutoringCta")}
+                </Link>
+              </>
+            ) : (
+              <>
+                <h2 className="text-lg md:text-xl font-bold text-black mt-2 tracking-wide">
+                  {t("hero.soy")}
+                </h2>
+                <div className="lg:w-2/3 md:w-full">
+                  <h2 className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">
+                    {t("hero.titulo")}
+                    <span className="inline bg-blue-200 text-black px-0.5 py-0.5">
+                      {" "}
+                      {t("hero.tusSueños")}
+                    </span>
+                  </h2>
+                </div>
+                <div className="flex gap-1 items-center mt-[30px]">
+                  <TrackedCTAButton
+                    href="#contacta"
+                    className="btn btn-primary transition-all duration-300"
+                  >
+                    {t("hero.descubreAyuda")}
+                  </TrackedCTAButton>
+                  <motion.a
+                    href="#pricing"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="btn btn-text flex gap-1 transition-all duration-300"
+                  >
+                    <span>{t("hero.learnMore")}</span>
+                  </motion.a>
+                </div>
+              </>
+            )}
           </div>
 
-          {/* ----------- FOTO SOBRE RECTÁNGULO + CIRCULO DE TEXTO ----------- */}
           <div className="mt-20 md:mt-0 md:flex-1 flex justify-center md:justify-end relative">
-            
-            {/* Imagen sobre rectángulo */}
             <motion.div
               style={{ translateY }}
               className="
                 relative 
-                px-6 py-4
+                p-4
                 rounded-2xl 
                 backdrop-blur-md
                 bg-white/20 
                 shadow-lg 
                 border border-white/30
-                max-w-[450px] 
+                max-w-[320px] 
                 flex 
                 justify-center
+                items-center
               "
             >
               <motion.img
-                src={fotolateral.src}
+                src={fotoprofesional.src}
                 width={630}
                 height={630}
-                alt="Foto lateral"
-                className="rounded-xl -mb-20 md:-mb-40"
-                initial={{ y: -143 }}
-                animate={{ y: -143 }}
+                alt="Jan Gómez Escobar"
+                className="rounded-xl w-full h-auto object-cover"
               />
             </motion.div>
           </div>
-
         </div>
       </div>
     </section>
   );
 };
-

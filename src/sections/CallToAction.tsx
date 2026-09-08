@@ -8,7 +8,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { ClassCalendar } from "@/components/ClassCalendar";
 import { MapPin, ShoppingBag, Clock } from "lucide-react";
 
-export const CallToAction = () => {
+type CallToActionProps = {
+  variant?: "booking" | "simple";
+};
+
+export const CallToAction = ({ variant = "booking" }: CallToActionProps) => {
   const { t, language } = useLanguage();
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -17,6 +21,7 @@ export const CallToAction = () => {
   });
 
   const translateY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const isSimple = variant === "simple";
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -24,13 +29,13 @@ export const CallToAction = () => {
     telefono: "",
     horario: "",
     slotIso: "" as string,
+    mensaje: "",
   });
 
-  // Estado para el manejo de mensajes
-  const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const isSlotDateInRange = (slotIso: string): boolean => {
@@ -53,30 +58,41 @@ export const CallToAction = () => {
     e.preventDefault();
     setMessage(null);
 
-    if (!formData.horario) {
-      setMessage({ type: 'error', text: t("cta.errors.select_slot") });
-      return;
-    }
-    if (formData.slotIso && !isSlotDateInRange(formData.slotIso)) {
-      setMessage({ type: 'error', text: t("cta.errors.invalid_date") });
-      return;
+    if (!isSimple) {
+      if (!formData.horario) {
+        setMessage({ type: "error", text: t("cta.errors.select_slot") });
+        return;
+      }
+      if (formData.slotIso && !isSlotDateInRange(formData.slotIso)) {
+        setMessage({ type: "error", text: t("cta.errors.invalid_date") });
+        return;
+      }
     }
 
-    // Enviar email al endpoint
     try {
       const emailRes = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nombre: formData.nombre,
-          email: formData.email,
-          telefono: formData.telefono,
-          tipoContacto: "clase_gratuita",
-          horario: formData.horario,
-          slotIso: formData.slotIso || undefined,
-          mensaje: `Reserva de clase gratuita - Horario: ${formData.horario}`,
-          locale: language,
-        }),
+        body: JSON.stringify(
+          isSimple
+            ? {
+                nombre: formData.nombre,
+                email: formData.email,
+                tipoContacto: "general",
+                mensaje: formData.mensaje,
+                locale: language,
+              }
+            : {
+                nombre: formData.nombre,
+                email: formData.email,
+                telefono: formData.telefono,
+                tipoContacto: "clase_gratuita",
+                horario: formData.horario,
+                slotIso: formData.slotIso || undefined,
+                mensaje: `Reserva de clase gratuita - Horario: ${formData.horario}`,
+                locale: language,
+              }
+        ),
       });
 
       if (!emailRes.ok) {
@@ -84,66 +100,70 @@ export const CallToAction = () => {
         const apiError = typeof data?.error === "string" ? data.error : t("callToAction.errorEnviar");
         const apiDetails = typeof data?.details === "string" ? data.details : "";
         const errorText = apiDetails ? `${apiError} (${apiDetails})` : apiError;
-        setMessage({ type: 'error', text: errorText });
+        setMessage({ type: "error", text: errorText });
         console.error("Error en la respuesta del API:", emailRes.status, data);
         return;
       }
 
-      setMessage({ type: 'success', text: t("callToAction.mensajeEnviado") });
+      setMessage({
+        type: "success",
+        text: isSimple ? t("callToAction.simple.mensajeEnviado") : t("callToAction.mensajeEnviado"),
+      });
       setFormData({
         nombre: "",
         email: "",
         telefono: "",
         horario: "",
         slotIso: "",
+        mensaje: "",
       });
-
     } catch (error) {
-      setMessage({ type: 'error', text: t("callToAction.errorRed") });
+      setMessage({ type: "error", text: t("callToAction.errorRed") });
       console.error("Error al enviar el formulario:", error);
     }
   };
 
-
   return (
     <section
-      id="contacta"
+      id={isSimple ? "contact" : "contacta"}
       ref={sectionRef}
       className="scroll-mt-28 bg-gradient-to-b from-white to-[#D2DCFF] py-24 overflow-x-clip relative"
     >
       <div className="container text-center relative">
         <div className="section-heading relative">
           <h2 className="section-title text-4xl md:text-5xl font-bold mb-2">
-            {t("callToAction.titulo")}
+            {isSimple ? t("callToAction.simple.titulo") : t("callToAction.titulo")}
           </h2>
           <p className="text-lg md:text-xl text-gray-700 mb-8">
-            {t("callToAction.subtitulo")}
+            {isSimple ? t("callToAction.simple.subtitulo") : t("callToAction.subtitulo")}
           </p>
+          <motion.div style={{ translateY }} className="hidden md:block absolute -left-16 top-0">
+            <Image src={starImage} alt="" width={80} className="opacity-70" />
+          </motion.div>
+          <motion.div style={{ translateY }} className="hidden md:block absolute -right-8 bottom-0">
+            <Image src={springImage} alt="" width={80} className="opacity-70" />
+          </motion.div>
         </div>
 
-        {/* Formulario con Calendario */}
         <form
           onSubmit={handleSubmit}
           className="max-w-4xl mx-auto mt-12 bg-white shadow-lg rounded-lg p-8 text-left"
         >
-          {/* Mensaje de estado */}
           {message && (
             <>
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className={`p-4 mb-4 rounded-lg text-center font-semibold ${
-                  message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                  message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
                 }`}
                 role="alert"
               >
                 {message.text}
               </motion.div>
-              {message.type === "success" && (
+              {!isSimple && message.type === "success" && (
                 <div className="flex flex-col items-center gap-3 mb-4">
-                  <p className="text-center text-sm text-gray-600">
-                    {t("cta.whatsapp_note")}
-                  </p>
+                  <p className="text-center text-sm text-gray-600">{t("cta.whatsapp_note")}</p>
                   <motion.a
                     href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "34600000000"}`}
                     target="_blank"
@@ -162,51 +182,51 @@ export const CallToAction = () => {
             </>
           )}
 
-          {/* Calendario */}
-          <div className="mb-8">
-            <ClassCalendar 
-              onSlotSelect={(slot, slotIso) => {
-                setFormData((prev) => ({ ...prev, horario: slot, slotIso: slotIso ?? "" }));
-              }}
-            />
-          </div>
+          {!isSimple && (
+            <>
+              <div className="mb-8">
+                <ClassCalendar
+                  onSlotSelect={(slot, slotIso) => {
+                    setFormData((prev) => ({ ...prev, horario: slot, slotIso: slotIso ?? "" }));
+                  }}
+                />
+              </div>
 
-          {/* Info block: ubicación, qué traer, cancelación */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="flex flex-col gap-2 p-4 rounded-lg bg-gray-50 border border-gray-200">
-              <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                <MapPin className="h-5 w-5 shrink-0 text-[#001738]" aria-hidden />
-                <span>{t("cta.location_title")}</span>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="flex flex-col gap-2 p-4 rounded-lg bg-gray-50 border border-gray-200">
+                  <div className="flex items-center gap-2 text-gray-800 font-semibold">
+                    <MapPin className="h-5 w-5 shrink-0 text-[#001738]" aria-hidden />
+                    <span>{t("cta.location_title")}</span>
+                  </div>
+                  <a
+                    href="https://www.google.com/maps/search/Biblioteca+Jaume+Fuster+Lesseps"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-blue-600 hover:underline"
+                  >
+                    {t("cta.location_val")}
+                  </a>
+                  <span className="text-sm text-gray-600"> {t("cta.location_negotiable")}</span>
+                </div>
+                <div className="flex flex-col gap-2 p-4 rounded-lg bg-gray-50 border border-gray-200">
+                  <div className="flex items-center gap-2 text-gray-800 font-semibold">
+                    <ShoppingBag className="h-5 w-5 shrink-0 text-[#001738]" aria-hidden />
+                    <span>{t("cta.bring_title")}</span>
+                  </div>
+                  <p className="text-sm text-gray-700">{t("cta.bring_val")}</p>
+                </div>
+                <div className="flex flex-col gap-2 p-4 rounded-lg bg-gray-50 border border-gray-200">
+                  <div className="flex items-center gap-2 text-gray-800 font-semibold">
+                    <Clock className="h-5 w-5 shrink-0 text-[#001738]" aria-hidden />
+                    <span>{t("cta.policy_title")}</span>
+                  </div>
+                  <p className="text-sm text-gray-700">{t("cta.policy_val")}</p>
+                </div>
               </div>
-              <a
-                href="https://www.google.com/maps/search/Biblioteca+Jaume+Fuster+Lesseps"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-blue-600 hover:underline"
-              >
-                {t("cta.location_val")}
-              </a>
-              <span className="text-sm text-gray-600"> {t("cta.location_negotiable")}</span>
-            </div>
-            <div className="flex flex-col gap-2 p-4 rounded-lg bg-gray-50 border border-gray-200">
-              <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                <ShoppingBag className="h-5 w-5 shrink-0 text-[#001738]" aria-hidden />
-                <span>{t("cta.bring_title")}</span>
-              </div>
-              <p className="text-sm text-gray-700">{t("cta.bring_val")}</p>
-            </div>
-            <div className="flex flex-col gap-2 p-4 rounded-lg bg-gray-50 border border-gray-200">
-              <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                <Clock className="h-5 w-5 shrink-0 text-[#001738]" aria-hidden />
-                <span>{t("cta.policy_title")}</span>
-              </div>
-              <p className="text-sm text-gray-700">{t("cta.policy_val")}</p>
-            </div>
-          </div>
+            </>
+          )}
 
-          {/* Información de contacto */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-            {/* Nombre */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2">
                 {t("callToAction.nombre")}
@@ -221,8 +241,6 @@ export const CallToAction = () => {
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
               />
             </div>
-
-            {/* Email */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2">
                 {t("callToAction.email")}
@@ -239,24 +257,39 @@ export const CallToAction = () => {
             </div>
           </div>
 
-          {/* Teléfono */}
-          <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2">
-              {t("callToAction.telefono")}
-            </label>
-            <motion.input
-              whileFocus={{ scale: 1.02 }}
-              type="tel"
-              name="telefono"
-              value={formData.telefono}
-              onChange={handleChange}
-              required
-              placeholder={t("callToAction.telefonoPlaceholder")}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-            />
-          </div>
+          {isSimple ? (
+            <div className="mb-6">
+              <label className="block text-gray-700 font-semibold mb-2">
+                {t("callToAction.simple.mensaje")}
+              </label>
+              <motion.textarea
+                whileFocus={{ scale: 1.01 }}
+                name="mensaje"
+                value={formData.mensaje}
+                onChange={handleChange}
+                required
+                rows={5}
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-y"
+              />
+            </div>
+          ) : (
+            <div className="mb-6">
+              <label className="block text-gray-700 font-semibold mb-2">
+                {t("callToAction.telefono")}
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="tel"
+                name="telefono"
+                value={formData.telefono}
+                onChange={handleChange}
+                required
+                placeholder={t("callToAction.telefonoPlaceholder")}
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              />
+            </div>
+          )}
 
-          {/* Botón */}
           <div className="flex justify-center">
             <motion.button
               type="submit"
@@ -264,8 +297,8 @@ export const CallToAction = () => {
               whileTap={{ scale: 0.95 }}
               className="bg-[#001738] text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-[#002d6d] transition-all duration-300 flex items-center gap-2"
             >
-              <span>{t("callToAction.enviar")}</span>
-              <svg 
+              <span>{isSimple ? t("callToAction.simple.enviar") : t("callToAction.enviar")}</span>
+              <svg
                 width={20}
                 height={20}
                 viewBox="0 0 24 24"

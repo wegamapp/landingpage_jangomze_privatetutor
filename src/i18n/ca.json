@@ -65,6 +65,12 @@
       "footer": "Ens veiem aviat.",
       "whatsapp_button": "Contactar per WhatsApp"
     },
+    "inquiry": {
+      "subject": "Missatge rebut, {nombre}",
+      "greeting": "Hola {nombre},",
+      "thanks": "Gràcies per escriure. He rebut el teu missatge i et respondré tan aviat com pugui.",
+      "footer": "Jan Gómez Escobar"
+    },
     "reminder": {
       "subject": "Recordatori: la teva classe és demà — TutorTrack",
       "greeting": "Hola {nombre},",

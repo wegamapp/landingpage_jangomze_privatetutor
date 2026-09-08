@@ -85,6 +85,12 @@
       "footer": "See you soon.",
       "whatsapp_button": "Contact on WhatsApp"
     },
+    "inquiry": {
+      "subject": "Message received, {nombre}",
+      "greeting": "Hi {nombre},",
+      "thanks": "Thanks for writing. I’ve received your message and will get back to you soon.",
+      "footer": "Jan Gómez Escobar"
+    },
     "reminder": {
       "subject": "Reminder: your class is tomorrow — TutorTrack",
       "greeting": "Hi {nombre},",

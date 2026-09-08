@@ -7,9 +7,9 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clases de prueba gratis | Metodología Jan Gómez Escobar",
+  title: "Jan Gómez Escobar | Software, EdTech & Education",
   description:
-    "Reserva tu clase de prueba gratuita. Metodología de estudio de alto rendimiento con Jan Gómez Escobar: técnicas validadas, seguimiento personalizado y resultados medibles.",
+    "Personal site of Jan Gómez Escobar: software engineering, AI/EdTech, research, and high-performance tutoring.",
 };
 
 export default function RootLayout({

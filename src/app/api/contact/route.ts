@@ -133,9 +133,10 @@ export async function POST(req: Request) {
   const locale = resolveLocale(rawLocale);
   const tr = getTranslations(rawLocale);
 
-  const selectedSlot = parseSelectedSlot(horario, mensaje);
+  const isBooking = Boolean((horario && horario.trim()) || (slotIso && slotIso.trim()));
+  const selectedSlot = isBooking ? parseSelectedSlot(horario, mensaje) : "—";
 
-  const slotDate = parseSlotToDate(selectedSlot, slotIso);
+  const slotDate = isBooking ? parseSlotToDate(selectedSlot, slotIso) : null;
   if (slotDate && !isSlotFromTomorrow(slotDate)) {
     return Response.json(
       { ok: false, error: "Solo se permiten reservas a partir de mañana" },
@@ -168,6 +169,21 @@ Horario seleccionado: ${selectedSlot}
 Mensaje:
 ${mensaje || "—"}`,
     });
+
+    if (!isBooking) {
+      const inqSubject = t(tr, "emails.inquiry.subject", { nombre: displayName });
+      const inqGreeting = t(tr, "emails.inquiry.greeting", { nombre: displayName });
+      const inqThanks = t(tr, "emails.inquiry.thanks");
+      const inqFooter = t(tr, "emails.inquiry.footer");
+      await client.send({
+        from: { name: FROM_NAME, email: FROM_EMAIL },
+        to: [{ email }],
+        subject: inqSubject,
+        text: `${inqGreeting}\n\n${inqThanks}\n\n${inqFooter}`,
+        html: `<p>${escapeHtml(inqGreeting)}</p><p>${escapeHtml(inqThanks)}</p><p>${escapeHtml(inqFooter)}</p>`,
+      });
+      return Response.json({ ok: true });
+    }
 
     // Email 2 — User: confirmación con i18n y HTML
     const confSubject = t(tr, "emails.confirmation.subject", { nombre: displayName });

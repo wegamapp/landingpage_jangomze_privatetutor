@@ -1,69 +1,64 @@
 "use client";
-import logo from "@/assets/firma.jpeg";
-// ELIMINADAS: Las siguientes importaciones directas de SVG han sido reemplazadas
-// import SocialX from "@/assets/social-x.svg";
-// import SocialInsta from "@/assets/social-insta.svg";
-// import SocialLinkedin from "@/assets/social-linkedin.svg";
-// import SocialPin from "@/assets/social-pin.svg";
-// import SocialYoutube from "@/assets/social-youtube.svg";
 import Image from "next/image";
+import { Github } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Definimos los datos de los iconos sociales para una fácil iteración
 const socialIcons = [
-  { 
-    name: "Instagram", 
-    src: "/images/social-insta.svg", 
-    href: "https://instagram.com/tu_usuario" 
+  {
+    name: "GitHub",
+    href: "https://github.com/jangomeze",
+    kind: "lucide" as const,
   },
-  { 
-    name: "LinkedIn", 
-    src: "/images/social-linkedin.svg", 
-    href: "https://linkedin.com/in/tu_usuario" 
+  {
+    name: "LinkedIn",
+    src: "/images/social-linkedin.svg",
+    href: "https://www.linkedin.com/in/jan-gomez-escobar-83808b331/",
+    kind: "image" as const,
   },
-  { 
-    name: "YouTube", 
-    src: "/images/social-youtube.svg", 
-    href: "https://www.youtube.com/@jangomezee" 
+  {
+    name: "X",
+    src: "/images/social-x.svg",
+    href: "https://x.com/jangomezee",
+    kind: "image" as const,
   },
-  // Si deseas agregar X/Twitter o Pinterest más tarde, puedes descomentar:
-  // { name: "X (Twitter)", src: "/images/social-x.svg", href: "https://x.com/tu_usuario" },
-  // { name: "Pinterest", src: "/images/social-pin.svg", href: "https://pinterest.com/tu_usuario" },
+  {
+    name: "TikTok",
+    href: "https://www.tiktok.com/@jangomezee?lang=es",
+    kind: "reactIcon" as const,
+  },
+  {
+    name: "YouTube",
+    src: "/images/social-youtube.svg",
+    href: "https://www.youtube.com/@jangomezee",
+    kind: "image" as const,
+  },
 ];
 
 export const Footer = () => {
   const { t } = useLanguage();
-  
+
   return (
     <footer className="bg-black text-[#BCBCBC] text-sm py-10 text-center">
       <div className="container mx-auto px-4">
-        <nav className="flex flex-col md:flex-row md:justify-center gap-6 mt-6">
-          {/* Puedes añadir enlaces de navegación aquí si es necesario */}
-        </nav>
-
-        <div className="flex justify-center gap-6 mt-6">
+        <div className="flex justify-center items-center gap-6 mt-6">
           {socialIcons.map((icon) => (
-            <a 
+            <a
               key={icon.name}
-              href={icon.href} 
-              target="_blank" 
+              href={icon.href}
+              target="_blank"
               rel="noopener noreferrer"
-              // Agregamos clases para un efecto visual de hover discreto
-              className="transition-opacity hover:opacity-75"
+              aria-label={icon.name}
+              className="transition-opacity hover:opacity-75 text-[#BCBCBC]"
             >
-              {/* Uso de next/image para el SVG */}
-              <Image
-                src={icon.src}
-                alt={`Icono de ${icon.name}`}
-                width={24} // Tamaño estándar para iconos sociales (corresponde a h-6 w-6)
-                height={24}
-              />
+              {icon.kind === "image" && icon.src && (
+                <Image src={icon.src} alt={icon.name} width={24} height={24} />
+              )}
+              {icon.kind === "lucide" && <Github className="h-6 w-6" aria-hidden />}
+              {icon.kind === "reactIcon" && <FaTiktok className="h-6 w-6" aria-hidden />}
             </a>
           ))}
         </div>
-        
-        {/* Nota: La imagen de logo importada (firma.jpeg) no se usa en este JSX, pero se mantiene la importación */}
-        
         <p className="mt-6">{t("footer.derechos")}</p>
       </div>
     </footer>
